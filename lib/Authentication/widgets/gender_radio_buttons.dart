@@ -1,8 +1,10 @@
-import 'dart:ffi';
+// ignore_for_file: unused_local_variable, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
 
 class RadioGroup extends StatefulWidget {
+  const RadioGroup({super.key});
+
   @override
   RadioGroupWidget createState() => RadioGroupWidget();
 }
@@ -15,14 +17,14 @@ class RadioGroupWidget extends State {
   int id = 1;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
+    final dS = MediaQuery.of(context).size;
+    final dW = dS.width;
+    final dH = dS.height;
 
     // Default Radio Button Selected Item When App Starts.
 
@@ -39,18 +41,16 @@ class RadioGroupWidget extends State {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Radio(
-          
           value: 1,
           groupValue: id,
           onChanged: (val) {
             genderSelected(val);
-            print('clicked');
             id = 1;
           },
         ),
-        Text( 
+        const Text(
           'Male',
-          style: new TextStyle(fontSize: 16.0),
+          style: TextStyle(fontSize: 16.0),
         ),
         Radio(
           value: 2,
@@ -62,9 +62,9 @@ class RadioGroupWidget extends State {
             });
           },
         ),
-        Text(
+        const Text(
           'Female',
-          style: new TextStyle(
+          style: TextStyle(
             fontSize: 16.0,
           ),
         ),
@@ -77,9 +77,9 @@ class RadioGroupWidget extends State {
             });
           },
         ),
-        Text(
+        const Text(
           'Other',
-          style: new TextStyle(fontSize: 16.0),
+          style: TextStyle(fontSize: 16.0),
         ),
       ],
     );

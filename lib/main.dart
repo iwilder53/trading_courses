@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/Authentication/screens/welcome_screen.dart';
-import 'package:trading_courses/home_screen/providers/courses_content_provider.dart';
 import 'package:trading_courses/home_screen/providers/quiz_provider.dart';
 
 import 'helpers/theme/themeManager.dart';
@@ -10,15 +9,9 @@ import 'Authentication/models/user.dart';
 import 'navigation/navigationService.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => User()),
-      ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-      ChangeNotifierProvider(create: (_) => Courses()),
-      ChangeNotifierProvider(create: (_) => QuizProvider()),
-      ChangeNotifierProvider(create: (_) => CourseContentProvider()),
-    ],
-    child: MyApp(),
+  runApp(ChangeNotifierProvider<ThemeNotifier>(
+    create: (_) => ThemeNotifier(),
+    child: const MyApp(),
   ));
 }
 
@@ -28,22 +21,29 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeNotifier>(
-      builder: (context, ThemeNotifier themeNotifier, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context)
-                  .copyWith(textScaleFactor: 1.0, boldText: false),
-              child: child!),
-          title: 'Flutter Demo',
-          theme: themeNotifier.lightTheme,
-          /* ThemeData(
-                  primarySwatch: Colors.blue, backgroundColor: Colors.white70), */
-          onGenerateRoute: generateRoute,
-          home: const WelcomeScreen(),
-        );
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => User()),
+        ChangeNotifierProvider(create: (_) => Courses()),
+        ChangeNotifierProvider(create: (_) => QuizProvider()),
+      ],
+      child: Consumer<ThemeNotifier>(
+        builder: (context, ThemeNotifier themeNotifier, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(context)
+                    .copyWith(textScaleFactor: 1.0, boldText: false),
+                child: child!),
+            title: 'TG',
+            theme: themeNotifier.lightTheme,
+            /* ThemeData(
+                    primarySwatch: Colors.blue, backgroundColor: Colors.white70), */
+            onGenerateRoute: generateRoute,
+            home: const WelcomeScreen(),
+          );
+        },
+      ),
     );
   }
 }

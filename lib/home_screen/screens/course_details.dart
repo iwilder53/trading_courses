@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/navigation/navigators.dart';
 
-import '../providers/courses_content_provider.dart';
+import '../providers/courses.dart';
 import '../widgets/TitleText.dart';
 
 class CourseDetailScreen extends StatelessWidget {
@@ -14,14 +13,14 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
+    final dS = MediaQuery.of(context).size;
+    final dW = dS.width;
+    final dH = dS.height;
 
-    final courseData = Provider.of<CourseContentProvider>(context);
-    final courseDetails = courseData.courseData[id];
+    final courseData = Provider.of<Courses>(context);
+    final courseDetails = courseData.freeCourses[id];
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -50,14 +49,14 @@ class CourseDetailScreen extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(courseDetails.author),
                   ),
                   Container(
-                    margin: EdgeInsets.all(0),
-                    width: display_width * 0.06,
-                    height: display_width * 0.06,
-                    decoration: BoxDecoration(
+                    margin: const EdgeInsets.all(0),
+                    width: dW * 0.06,
+                    height: dW * 0.06,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           image: NetworkImage(
@@ -71,7 +70,7 @@ class CourseDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   courseDetails.courseName,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 24,
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w700),
@@ -81,7 +80,7 @@ class CourseDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
                   courseDetails.genre,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 10,
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w700,
@@ -100,20 +99,18 @@ class CourseDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: SvgPicture.asset('assets/svg/star.svg'),
                         ),
-                        Text(courseDetails.stars.toString() +
-                            '(' +
-                            courseDetails.enrollCount +
-                            ')' +
-                            'Enrolled'),
+                        Text('${courseDetails.stars}(${courseDetails.enrollCount})Enrolled'),
                       ],
                     ),
                     OutlinedButton(
                       onPressed: () {
-                        courseData.enroll(courseDetails.id);
-                        print(courseDetails.enrolled);
+                        courseData.enrollFree(courseDetails.id);
+                        if (kDebugMode) {
+                          print(courseDetails.enrolled);
+                        }
                       },
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(width: 1.0, color: Colors.black),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
                       /* ButtonStyle(
                         shape: MaterialStateProperty.all(
@@ -126,7 +123,7 @@ class CourseDetailScreen extends StatelessWidget {
                             ? 'Enrolled'
                             : courseDetails.price,
                         // "Enroll",
-                        style: TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                       ),
                     )
                   ],
@@ -134,26 +131,26 @@ class CourseDetailScreen extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
+                children: const [
                   Text('beginner'),
                   Text('20 modules'),
                   Text('4 hours'),
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: display_height * 0.04),
+                padding: EdgeInsets.only(top: dH * 0.04),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleText(title: 'Course Highlights'),
+                    const TitleText(title: 'Course Highlights'),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 8),
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text('\u2022 20 Modules',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
@@ -189,13 +186,13 @@ class CourseDetailScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: display_height * 0.04),
+                padding: EdgeInsets.only(top: dH * 0.04),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     TitleText(title: 'About Course'),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                           style: TextStyle(
                             fontFamily: 'Montserrat',
@@ -208,7 +205,7 @@ class CourseDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              TitleText(title: 'Curriculum'),
+              const TitleText(title: 'Curriculum'),
             ],
           ),
         ),

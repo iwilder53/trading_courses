@@ -11,24 +11,21 @@ import 'package:trading_courses/home_screen/widgets/paid_courses.dart';
 import '../widgets/quiz_grid_tile.dart';
 import '../models/homepage_carousel_items.dart';
 import '../../Authentication/models/user.dart';
-import '../models/quiz_model.dart';
 import '../widgets/free_courses.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
- 
 
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
- 
   @override
   Widget build(BuildContext context) {
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
+    final dS = MediaQuery.of(context).size;
+    final dW = dS.width;
+    final dH = dS.height;
     final carouselController = CarouselController();
 
     final quizData = Provider.of<QuizProvider>(context);
@@ -54,7 +51,7 @@ class _DashboardState extends State<Dashboard> {
             backgroundColor: Colors.transparent,
             body: ListView(
               // shrinkWrap: true,
-              //  padding: EdgeInsets.all(display_width * 0.04),
+              //  padding: EdgeInsets.all(dW * 0.04),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -109,9 +106,7 @@ class _DashboardState extends State<Dashboard> {
                       autoPlay: true,
                       autoPlayInterval: const Duration(seconds: 2)),
                   items: homeCarouselImgList
-                      .map((item) => Container(
-                            child: Center(child: SvgPicture.asset(item)),
-                          ))
+                      .map((item) => Center(child: SvgPicture.asset(item)))
                       .toList(),
                 ),
                 Container(
@@ -122,8 +117,8 @@ class _DashboardState extends State<Dashboard> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                     )),
                 Container(
-                    width: display_width * 0.6,
-                    height: display_height * 0.08,
+                    width: dW * 0.6,
+                    height: dH * 0.08,
                     margin: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -217,8 +212,8 @@ class _DashboardState extends State<Dashboard> {
                         ))
                   ],
                 ),
-                Container(
-                  height: display_height * 0.4,
+                SizedBox(
+                  height: dH * 0.4,
                   child: GridView.builder(
                     // padding: const EdgeInsets.all(10.0),
                     itemCount: 4, // quizes.length,
@@ -270,7 +265,7 @@ class _DashboardState extends State<Dashboard> {
                   ],
                 ),
                 Container(
-                  //  height: display_height * 0.4,
+                  //  height: dH * 0.4,
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -289,7 +284,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 SizedBox(
-                  height: display_height * 0.4,
+                  height: dH * 0.4,
                 )
               ],
             ),

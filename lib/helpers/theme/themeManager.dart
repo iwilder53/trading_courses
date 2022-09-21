@@ -1,5 +1,6 @@
+// ignore_for_file: file_names, avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'storageManager.dart';
 
 class ThemeNotifier with ChangeNotifier {
@@ -7,13 +8,11 @@ class ThemeNotifier with ChangeNotifier {
     primarySwatch: Colors.grey,
     primaryColor: Colors.black,
     brightness: Brightness.dark,
-    accentColor: Colors.white,
     fontFamily: 'Roboto',
     backgroundColor: const Color(0xFF212121),
     disabledColor: Colors.purple[300],
-    accentIconTheme: IconThemeData(color: Colors.black),
     dividerColor: Colors.black12,
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headline1: TextStyle(fontSize: 12.0, fontWeight: FontWeight.normal),
       headline2: TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal),
       headline3: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
@@ -28,11 +27,11 @@ class ThemeNotifier with ChangeNotifier {
   final lightTheme = ThemeData(
     // primarySwatch: Colors.grey,
     scaffoldBackgroundColor: Colors.white,
-    canvasColor: Color(0xFFF8F8F8),
+    canvasColor: const Color(0xFFF8F8F8),
     primaryColor: const Color(0xFF1DA1F2),
-    secondaryHeaderColor: Color(0xFF709489),
+    secondaryHeaderColor: const Color(0xFF709489),
     brightness: Brightness.light,
-    hintColor: Color(0xffafafaf),
+    hintColor: const Color(0xffafafaf),
     fontFamily: 'Montserrat',
 
     backgroundColor: Colors.white,
@@ -75,7 +74,7 @@ class ThemeNotifier with ChangeNotifier {
 
   ThemeNotifier() {
     StorageManager.readData('themeMode').then((value) {
-      print('value read from storage: ' + value.toString());
+      print('value read from storage: $value');
       var themeMode = value ?? 'light';
       if (themeMode == 'light') {
         _themeData = lightTheme;

@@ -17,15 +17,13 @@ class QuizGridTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
+
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         // padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
@@ -42,14 +40,14 @@ class QuizGridTile extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w600,
                           fontSize: 18),
                     ),
                     Text(
-                      duration.toString() + ' min',
-                      style: TextStyle(
+                      '$duration min',
+                      style: const TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w500,
                           fontSize: 12),

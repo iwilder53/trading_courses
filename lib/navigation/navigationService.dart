@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:trading_courses/Authentication/screens/welcome_screen.dart';
 import '../Authentication/screens/info_registration_screen.dart';
@@ -20,7 +22,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         id: settings.arguments as int,
       ));
     case NamedRoute.infoRegistrationScreen:
-      return _getPageRoute(const InfoRegistrationScreen());
+      return _getPageRoute(const PersonalInformationScreen());
     default:
       return _getPageRoute(const WelcomeScreen());
   }

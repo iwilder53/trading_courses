@@ -15,18 +15,29 @@ class Course with ChangeNotifier {
   String reviewCount;
   Map<String, dynamic> courseContent;
 
+  String enrollCount;
+  Map<String, dynamic> curriculum;
+  List<String> tags;
+  List<String> requirments;
+String genre;
   Course(
       {required this.id,
       required this.courseName,
+      required this.genre,
+      required this.tags,
+      required this.requirments,
       required this.description,
-      required this.subTitle,
-      required this.bannerImage,
-      required this.bgColor,
-      required this.bannerText,
       required this.stars,
       required this.author,
       required this.price,
       required this.enrolled,
+      required this.enrollCount,
+      required this.curriculum,
+      required this.subTitle,
+      required this.bannerImage,
+      required this.bgColor,
+      required this.bannerText,
+   
       required this.reviewCount,
       required this.courseContent});
 }

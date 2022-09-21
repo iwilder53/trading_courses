@@ -1,6 +1,6 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, unused_local_variable
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HelpVideos extends StatelessWidget {
   final image;
@@ -14,35 +14,33 @@ class HelpVideos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
-    return Container(
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(image),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  duration + ' min',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
-            )
-          ]),
-    );
+    final dS = MediaQuery.of(context).size;
+    final dW = dS.width;
+    final dH = dS.height;
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(image),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
+              Text(
+                duration + ' min',
+                style: const TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          )
+        ]);
   }
 }

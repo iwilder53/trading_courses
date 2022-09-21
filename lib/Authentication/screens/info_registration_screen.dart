@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,14 +11,15 @@ import '../../../Authentication/models/user.dart';
 import '../../home_screen/screens/home_screen.dart';
 import '../widgets/gender_radio_buttons.dart';
 
-class InfoRegistrationScreen extends StatefulWidget {
-  const InfoRegistrationScreen({super.key});
+class PersonalInformationScreen extends StatefulWidget {
+  const PersonalInformationScreen({super.key});
 
   @override
-  State<InfoRegistrationScreen> createState() => _InfoRegistrationScreenState();
+  State<PersonalInformationScreen> createState() =>
+      _PersonalInformationScreen();
 }
 
-class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
+class _PersonalInformationScreen extends State<PersonalInformationScreen> {
   String formattedDate = 'dd/mm/yyyy';
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController nameInput = TextEditingController();
@@ -39,13 +41,17 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
+    final dS = MediaQuery.of(context).size;
+    final dW = dS.width;
+    final dH = dS.height;
 
+    // ignore: unused_local_variable, no_leading_underscores_for_local_identifiers
     int _id = 2;
+    // ignore: unused_element
     void genderSelected(int? id) {
-      print('clicked');
+      if (kDebugMode) {
+        print('clicked');
+      }
       setState(() {
         _id = id!;
       });
@@ -53,13 +59,13 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
 
     return Scaffold(
         body: Stack(children: [
-      ListView(padding: EdgeInsets.all(18), children: [
+      ListView(padding: const EdgeInsets.all(18), children: [
         Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: display_height * 0.05,
+                height: dH * 0.05,
               ),
               Row(
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,14 +73,14 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                 children: [
                   IconButton(
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () {
                       pop(context);
                     },
                   ),
                   /*     SizedBox(
-              width: display_width / 1.8,
+              width: dW / 1.8,
             ), */
                   const Text(
                     'Step 2 of 2',
@@ -88,8 +94,7 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
               ),
               Container(
                   //  alignment: Alignment.centerLeft,
-                  padding:
-                      EdgeInsets.only(top: 40, bottom: display_height * 0.02),
+                  padding: EdgeInsets.only(top: 40, bottom: dH * 0.02),
                   child: SvgPicture.asset('assets/svg/profile_details.svg')),
               Container(
                   // alignment: Alignment.centerLeft,
@@ -102,15 +107,16 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                             fontWeight: FontWeight.w600,
                           ))),
               SizedBox(
-                height: display_height * 0.02,
+                height: dH * 0.02,
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(vertical: display_height * 0.02),
-                width: display_width * 0.9,
+                margin: EdgeInsets.symmetric(vertical: dH * 0.02),
+                width: dW * 0.9,
                 child: TextField(
                   controller: nameInput,
-                  decoration: InputDecoration(
+                  textCapitalization: TextCapitalization.words,
+                  decoration: const InputDecoration(
                       label: Text(
                         'Name',
                         style: TextStyle(color: Colors.black),
@@ -124,8 +130,8 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(vertical: display_height * 0.02),
-                width: display_width,
+                margin: EdgeInsets.symmetric(vertical: dH * 0.02),
+                width: dW,
                 child: Form(
                   child: TextFormField(
                     key: _mailFormKey,
@@ -135,10 +141,11 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                       } else if (!EmailValidator.validate(value)) {
                         return 'Please provide a valid email address';
                       }
+                      return null;
                     },
                     controller: mailInput,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       label: Text(
                         'Email Address',
                         style: TextStyle(color: Colors.black),
@@ -154,7 +161,7 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
               Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.symmetric(vertical: 10),
-                width: display_width * 0.9,
+                width: dW * 0.9,
                 child: TextField(
                   controller: dateInput,
                   inputFormatters: <TextInputFormatter>[
@@ -162,14 +169,14 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                     FilteringTextInputFormatter.digitsOnly
                   ],
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.calendar_month_outlined),
-                    label: Text(
+                    suffixIcon: const Icon(Icons.calendar_month_outlined),
+                    label: const Text(
                       'Birth Date',
                       style: TextStyle(color: Colors.black),
                     ),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintText: formattedDate,
-                    contentPadding: EdgeInsets.only(top: 8),
+                    contentPadding: const EdgeInsets.only(top: 8),
                   ),
                   onTap: () async {
                     DateTime? pickedDate = await showDatePicker(
@@ -181,9 +188,7 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                     if (pickedDate != null) {
                       formattedDate =
                           DateFormat('dd/MM/yyyy').format(pickedDate);
-                      print(dateInput.text);
 
-                      print(formattedDate);
 
                       dateInput.text = formattedDate;
                       setDate();
@@ -198,7 +203,7 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                   'Gender ',
                 ),
               ),
-              RadioGroup() /* Row(
+              const RadioGroup() /* Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             //mainAxisAlignment: MainAxisAlignment.center,
 
@@ -253,15 +258,14 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
         alignment: Alignment.bottomCenter,
         child: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            width: display_width,
-            height: display_height * 0.07,
+            width: dW,
+            height: dH * 0.07,
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
             ),
-            margin: EdgeInsets.only(bottom: display_height * 0.1),
+            margin: EdgeInsets.only(bottom: dH * 0.1),
             child: ElevatedButton(
               onPressed: () {
-                print('valid email');
 
                 Provider.of<User>(context, listen: false).register(
                     mailInput.text.toString(),
@@ -270,7 +274,7 @@ class _InfoRegistrationScreenState extends State<InfoRegistrationScreen> {
                     RadioGroupWidget().genders[RadioGroupWidget().id]);
 
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Dashboard()));
+                    .push(MaterialPageRoute(builder: (context) => const Dashboard()));
               },
               child: const Text(
                 "Continue",

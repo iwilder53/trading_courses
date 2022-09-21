@@ -8,63 +8,67 @@ import '../widgets/divider_line.dart';
 import '../widgets/footer.dart';
 import '../widgets/other_login_options.dart';
 
+// ignore: must_be_immutable
 class MobileScreen extends StatelessWidget {
-  const MobileScreen({super.key});
+  MobileScreen({super.key});
+
+  TextEditingController phoneNumController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController phoneNumController = TextEditingController();
-
-    final display_size = MediaQuery.of(context).size;
-    final display_width = display_size.width;
-    final display_height = display_size.height;
-    final _formKey = GlobalKey<FormState>();
+    final dS = MediaQuery.of(context).size;
+    final dW = dS.width;
+    final dH = dS.height;
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: display_height * 0.02),
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.only(top: dH * 0.02),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: display_height * 0.1,
+              height: dH * 0.1,
             ),
             Container(
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: SvgPicture.asset('assets/svg/mobile_login_icon.svg')),
             Container(
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.zero,
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 10),
-                child: const Text(
+                padding: const EdgeInsets.only(top: 0, bottom: 0, left: 10),
+                child: Text(
                   'Mobile Number',
                   textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  // style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(fontSize: 20, fontWeight: FontWeight.w600),
                 )),
             Container(
-                margin: EdgeInsets.zero,
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: const Text(
                   'Enter your number to proceed',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                 )),
-            Container(
-              width: display_width,
+            SizedBox(
+              width: dW,
               child: Row(
                 children: [
-                  // SizedBox(width: display_width * 0.3),
+                  // SizedBox(width: dW * 0.3),
                   /*   const Icon(
                     Icons.phone_android_outlined,
                   ), */
                   Container(
                     alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    margin: EdgeInsets.all(0),
-                    width: display_width * 0.9,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.all(0),
+                    width: dW * 0.9,
                     child: Form(
                         key: _formKey,
                         child: Column(children: [
@@ -88,12 +92,12 @@ class MobileScreen extends StatelessWidget {
                               FilteringTextInputFormatter.digitsOnly
                             ], // Only numbers can be entered
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            width: display_width,
-                            height: display_height * 0.06,
+                          SizedBox(
+                            width: dW,
+                            height: dH * 0.06,
                             //  padding: EdgeInsets.symmetric(horizontal: 12.0),
                             child: ElevatedButton(
                               onPressed: () {
@@ -105,7 +109,7 @@ class MobileScreen extends StatelessWidget {
                                   // Navigator.of(context).push(MaterialPageRoute(builder: (context) => OtpScreen(MobNumber: phoneNumController.text) ));
                                 }
                               },
-                              child: Text("GET OTP"),
+                              child: const Text("GET OTP"),
                             ),
                           ),
                         ])),
@@ -113,9 +117,9 @@ class MobileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            HorizontalOrLine(label: 'OR', height: 10),
-            OtherLoginOptions(),
-            Footer()
+            const HorizontalOrLine(label: 'OR', height: 10),
+            const OtherLoginOptions(),
+            const Footer()
           ],
         ),
       ),

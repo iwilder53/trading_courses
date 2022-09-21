@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageManager {
@@ -10,7 +12,6 @@ class StorageManager {
     } else if (value is bool) {
       prefs.setBool(key, value);
     } else {
-      print("Invalid Type");
     }
   }
 
