@@ -30,6 +30,25 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     final dH = dS.height;
     final courseData = Provider.of<Courses>(context);
     final courseDetails = courseData.freeCourses[widget.id];
+    get_chip(name) {
+      return Chip(
+          padding: EdgeInsets.all(0),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+          backgroundColor: Color(0xff3199D8),
+          label: Text(
+            "#${name}",
+            style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                fontFamily: 'Montserrat',
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: Colors.white),
+          ));
+    }
+
+    generate_tags() {
+      return courseDetails.tags.map((tag) => get_chip(tag)).toList();
+    }
 
     List<Map<String, dynamic>> _items = List.generate(
         2,
@@ -442,7 +461,18 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                           onPressed: () {},
                           icon: Image.asset('assets/images/Chevron.png'))
                     ],
-                  ))
+                  )),
+              TitleText(title: 'Tags'),
+              Container(
+                width: dW * 0.2,
+                padding: EdgeInsets.all(8),
+                height: dW,
+                child: Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: <Widget>[...generate_tags()],
+                ),
+              ),
             ],
           ),
         ),

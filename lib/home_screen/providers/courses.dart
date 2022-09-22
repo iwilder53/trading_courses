@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../models/course_model.dart';
 
 class Courses extends ChangeNotifier {
-  String courseName = "";
+  /*  String courseName = "";
   String description = "";
   bool enrolled = false;
   String id = "";
   String subTitle = "";
   late Map<String, dynamic> courseContent;
-
+ */
   final List<Course> _freeCourses = [
     Course(
         id: '1',
@@ -44,7 +44,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
@@ -84,7 +84,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
@@ -120,7 +120,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
@@ -156,7 +156,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false)
   ];
@@ -195,7 +195,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
@@ -231,7 +231,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
@@ -267,7 +267,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
@@ -303,7 +303,7 @@ class Courses extends ChangeNotifier {
         description:
             'This Course is a comprehensive course in stock market trading that will take you from beginner to advance level.\n\nYou will be able to trade like a professional trader and start earning regular income after a few months of practice with our support. More...',
         author: 'Tushar R. Ghone',
-        tags: ['Stock Market', 'Trading'],
+        tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false)
   ];
