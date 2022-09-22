@@ -7,18 +7,52 @@ import 'package:trading_courses/navigation/navigators.dart';
 import '../providers/courses.dart';
 import '../widgets/TitleText.dart';
 
-class CourseDetailScreen extends StatelessWidget {
+class CourseDetailScreen extends StatefulWidget {
   final int id;
   const CourseDetailScreen({super.key, required this.id});
+
+  @override
+  State<CourseDetailScreen> createState() => _CourseDetailScreenState();
+}
+
+class _CourseDetailScreenState extends State<CourseDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // ignore: prefer_final_fields
 
   @override
   Widget build(BuildContext context) {
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
     final dH = dS.height;
-
     final courseData = Provider.of<Courses>(context);
-    final courseDetails = courseData.freeCourses[id];
+    final courseDetails = courseData.freeCourses[widget.id];
+
+    List<Map<String, dynamic>> _items = List.generate(
+        2,
+        // courseDetails.curriculum.length,
+        (index) => {
+              'title': courseDetails.curriculum[index].keys.first.toString(),
+              'courses': // ['s', 's', 's'],
+                  courseDetails.curriculum[0]
+                      [courseDetails.curriculum[0].keys.first.toString()],
+              //'courses': courseDetails.curriculum[index].values.toList()[index],
+              'isExpanded': courseDetails.isExpanded
+            },
+        growable: false);
+
+    //  List _courseModules
+    void printCurriculum(int index, bool isExpanded) {
+      courseData.expand((index + 1).toString());
+      // print(_items[0].toString());
+      //  print(courseDetails.curriculum[0][0].entries);
+      print(courseDetails.curriculum[1]
+          [courseDetails.curriculum[1].keys.first.toString()]);
+    }
+
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -52,7 +86,7 @@ class CourseDetailScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(courseDetails.author),
                   ),
-                  Container(
+                  /*  Container(
                     margin: const EdgeInsets.all(0),
                     width: dW * 0.06,
                     height: dW * 0.06,
@@ -63,7 +97,7 @@ class CourseDetailScreen extends StatelessWidget {
                               'https://googleflutter.com/sample_image.jpg'),
                           fit: BoxFit.fill),
                     ),
-                  ),
+                  ), */
                 ],
               ),
               Padding(
@@ -99,7 +133,9 @@ class CourseDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: SvgPicture.asset('assets/svg/star.svg'),
                         ),
-                        Text('${courseDetails.stars}(${courseDetails.enrollCount})Enrolled'),
+                        Text(
+                          '${courseDetails.stars}(${courseDetails.enrollCount})Enrolled',
+                        ),
                       ],
                     ),
                     OutlinedButton(
@@ -172,7 +208,7 @@ class CourseDetailScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     height: 1.55,
                                   )),
-                              Text('\u2022 ',
+                              Text('\u2022 Quizes and Resources included',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 14,
@@ -206,6 +242,207 @@ class CourseDetailScreen extends StatelessWidget {
                 ),
               ),
               const TitleText(title: 'Curriculum'),
+              Container(
+                color: Colors.transparent,
+                //  height: dW,
+                width: dH,
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: ExpansionPanelList(
+                    elevation: 0,
+                    expansionCallback: (index, isExpanded) {
+                      printCurriculum(index, isExpanded);
+                    },
+                    animationDuration: const Duration(milliseconds: 600),
+                    children: _items
+                        .map(
+                          (item) => ExpansionPanel(
+                            backgroundColor: Colors.transparent,
+                            canTapOnHeader: true,
+                            headerBuilder: (_, isExpanded) => Container(
+                                //color: Colors.transparent,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 30),
+                                child: Text(
+                                  item['title'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline1!
+                                      .copyWith(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black),
+                                )),
+                            body: Padding(
+                              // color: Colors.transparent,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 30),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      item['courses'][0],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline1!
+                                          .copyWith(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      item['courses'][1],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline1!
+                                          .copyWith(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      item['courses'][2],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline1!
+                                          .copyWith(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            isExpanded: item['isExpanded'],
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+              const TitleText(title: 'Requirments'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        //  Icon(Icons.smartphone_outlined),
+                        Text(
+                          courseDetails.requirments[0].toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        //  Icon(Icons.smartphone_outlined),
+                        Text(
+                          courseDetails.requirments[1].toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              TitleText(title: 'About Instructor'),
+              Container(
+                  padding: EdgeInsets.all(12),
+                  /*  margin: EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                  ), */
+                  height: dW * 0.25,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                          width: dW * 0.2,
+                          child: Image.asset('assets/images/course_1.png')),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              courseDetails.author,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline1!
+                                  .copyWith(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                            ),
+                            Text(
+                              'SEBI Registered Advisor',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline1!
+                                  .copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:
+                                      Image.asset('assets/images/Vector-2.png'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:
+                                      Image.asset('assets/images/Vector.png'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:
+                                      Image.asset('assets/images/Facebook.png'),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Image.asset('assets/images/Chevron.png'))
+                    ],
+                  ))
             ],
           ),
         ),

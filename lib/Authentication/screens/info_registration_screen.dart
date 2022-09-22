@@ -58,152 +58,148 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
     }
 
     return Scaffold(
-        body: Stack(children: [
-      ListView(padding: const EdgeInsets.all(18), children: [
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: dH * 0.05,
-              ),
-              Row(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.all(0),
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () {
-                      pop(context);
-                    },
-                  ),
-                  /*     SizedBox(
+        body: ListView(padding: const EdgeInsets.all(18), children: [
+      Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: dH * 0.05,
+            ),
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.all(0),
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    pop(context);
+                  },
+                ),
+                /*     SizedBox(
               width: dW / 1.8,
             ), */
-                  const Text(
-                    'Step 2 of 2',
+                const Text(
+                  'Step 2 of 2',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xff737373)),
+                ),
+              ],
+            ),
+            Container(
+                //  alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(top: 40, bottom: dH * 0.02),
+                child: SvgPicture.asset('assets/svg/profile_details.svg')),
+            Container(
+                // alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                child: const Text('Please enter the details below to continue',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xff737373)),
-                  ),
-                ],
-              ),
-              Container(
-                  //  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(top: 40, bottom: dH * 0.02),
-                  child: SvgPicture.asset('assets/svg/profile_details.svg')),
-              Container(
-                  // alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  child:
-                      const Text('Please enter the details below to continue',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ))),
-              SizedBox(
-                height: dH * 0.02,
-              ),
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(vertical: dH * 0.02),
-                width: dW * 0.9,
-                child: TextField(
-                  controller: nameInput,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: const InputDecoration(
-                      label: Text(
-                        'Name',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-
-                      // prefixIcon: Icon(Icons.phone_android_outlined),
-                      hintText: 'Enter your full name here',
-                      contentPadding: EdgeInsets.symmetric(vertical: 5)),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(vertical: dH * 0.02),
-                width: dW,
-                child: Form(
-                  child: TextFormField(
-                    key: _mailFormKey,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your email address';
-                      } else if (!EmailValidator.validate(value)) {
-                        return 'Please provide a valid email address';
-                      }
-                      return null;
-                    },
-                    controller: mailInput,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: const InputDecoration(
-                      label: Text(
-                        'Email Address',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: 'Enter your email address here',
-                      contentPadding: EdgeInsets.symmetric(vertical: 5),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                width: dW * 0.9,
-                child: TextField(
-                  controller: dateInput,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow('/'),
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  decoration: InputDecoration(
-                    suffixIcon: const Icon(Icons.calendar_month_outlined),
-                    label: const Text(
-                      'Birth Date',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ))),
+            SizedBox(
+              height: dH * 0.02,
+            ),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(vertical: dH * 0.02),
+              width: dW * 0.9,
+              child: TextField(
+                controller: nameInput,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(
+                    label: Text(
+                      'Name',
                       style: TextStyle(color: Colors.black),
                     ),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
-                    hintText: formattedDate,
-                    contentPadding: const EdgeInsets.only(top: 8),
-                  ),
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1950),
-                        lastDate: DateTime.now());
 
-                    if (pickedDate != null) {
-                      formattedDate =
-                          DateFormat('dd/MM/yyyy').format(pickedDate);
-
-
-                      dateInput.text = formattedDate;
-                      setDate();
-                    } else {}
+                    // prefixIcon: Icon(Icons.phone_android_outlined),
+                    hintText: 'Enter your full name here',
+                    contentPadding: EdgeInsets.symmetric(vertical: 5)),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(vertical: dH * 0.02),
+              width: dW,
+              child: Form(
+                child: TextFormField(
+                  key: _mailFormKey,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your email address';
+                    } else if (!EmailValidator.validate(value)) {
+                      return 'Please provide a valid email address';
+                    }
+                    return null;
                   },
+                  controller: mailInput,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'Email Address',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintText: 'Enter your email address here',
+                    contentPadding: EdgeInsets.symmetric(vertical: 5),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(top: 20),
-                alignment: Alignment.centerLeft,
-                child: const Text(
-                  'Gender ',
+            ),
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              width: dW * 0.9,
+              child: TextField(
+                controller: dateInput,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow('/'),
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(Icons.calendar_month_outlined),
+                  label: const Text(
+                    'Birth Date',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  hintText: formattedDate,
+                  contentPadding: const EdgeInsets.only(top: 8),
                 ),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime.now());
+
+                  if (pickedDate != null) {
+                    formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
+
+                    dateInput.text = formattedDate;
+                    setDate();
+                  } else {}
+                },
               ),
-              const RadioGroup() /* Row(
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 20),
+              alignment: Alignment.centerLeft,
+              child: const Text(
+                'Gender ',
+              ),
+            ),
+            const RadioGroup() /* Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             //mainAxisAlignment: MainAxisAlignment.center,
 
@@ -252,29 +248,24 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
               ),
             ],
           ), */
-            ]),
-      ]),
+          ]),
       Align(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.bottomLeft,
         child: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
             width: dW,
-            height: dH * 0.07,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-            ),
-            margin: EdgeInsets.only(bottom: dH * 0.1),
+            height: dW * 0.12,
+            margin: EdgeInsets.only(top: dW * 0.08),
             child: ElevatedButton(
               onPressed: () {
-
                 Provider.of<User>(context, listen: false).register(
                     mailInput.text.toString(),
                     nameInput.text.toString(),
                     dateInput.text.toString(),
                     RadioGroupWidget().genders[RadioGroupWidget().id]);
 
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => const Dashboard()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Dashboard()));
               },
               child: const Text(
                 "Continue",

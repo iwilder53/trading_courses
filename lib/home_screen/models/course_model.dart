@@ -14,17 +14,18 @@ class Course with ChangeNotifier {
   String price;
   String reviewCount;
   Map<String, dynamic> courseContent;
-
+  bool isExpanded;
   String enrollCount;
-  Map<String, dynamic> curriculum;
+  List<Map<String, dynamic>> curriculum;
   List<String> tags;
   List<String> requirments;
-String genre;
+  String genre;
   Course(
       {required this.id,
       required this.courseName,
       required this.genre,
       required this.tags,
+      required this.isExpanded,
       required this.requirments,
       required this.description,
       required this.stars,
@@ -37,7 +38,6 @@ String genre;
       required this.bannerImage,
       required this.bgColor,
       required this.bannerText,
-   
       required this.reviewCount,
       required this.courseContent});
 }

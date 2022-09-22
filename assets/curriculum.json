@@ -1,0 +1,11 @@
+
+"clum":{
+    "module1":{
+        "isExpanded":true,
+        "courses":["class1","class2"]
+    },
+    "module2":{
+        "isExpanded":false,
+        "courses":["class1","class2"]
+    },
+}

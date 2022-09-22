@@ -37,8 +37,7 @@ class MobileScreen extends StatelessWidget {
                 child: SvgPicture.asset('assets/svg/mobile_login_icon.svg')),
             Container(
                 alignment: Alignment.centerLeft,
-                margin: EdgeInsets.zero,
-                padding: const EdgeInsets.only(top: 0, bottom: 0, left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   'Mobile Number',
                   textAlign: TextAlign.start,
@@ -82,7 +81,9 @@ class MobileScreen extends StatelessWidget {
                             },
                             controller: phoneNumController,
                             decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.phone_android_outlined),
+                                prefixIcon: Padding(
+                                    padding: EdgeInsets.all(12),
+                                    child: Icon(Icons.phone_android_outlined)),
                                 hintText: 'Enter your mobile number',
                                 contentPadding: EdgeInsets.only(top: 18)),
                             keyboardType: TextInputType.phone,

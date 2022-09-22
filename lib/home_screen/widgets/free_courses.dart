@@ -39,7 +39,7 @@ class FreeCourses extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const CourseDetailScreen(
-                              id: 0,
+                              id: 1,
                             )));
                   },
                   child: Column(
@@ -51,7 +51,8 @@ class FreeCourses extends StatelessWidget {
                         child: Row(
                           children: [
                             SvgPicture.asset('assets/svg/star.svg'),
-                            Text('${freeCourses[i].stars} (${freeCourses[i].reviewCount})'),
+                            Text(
+                                '${freeCourses[i].stars} (${freeCourses[i].reviewCount})'),
                           ],
                         ),
                       ),
@@ -65,7 +66,8 @@ class FreeCourses extends StatelessWidget {
                           Container(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                                style: const TextStyle(color: Color(0xff4C6FFF)),
+                                style:
+                                    const TextStyle(color: Color(0xff4C6FFF)),
                                 textAlign: TextAlign.right,
                                 freeCourses[i].bannerText),
                           )

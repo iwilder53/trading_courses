@@ -33,21 +33,13 @@ class _DashboardState extends State<Dashboard> {
     return Consumer<User>(builder: (context, user, _) {
       return MaterialApp(
         home: Container(
+          padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [Color(0xffFBFFF4), Color(0xff98CCEC)])),
           child: Scaffold(
-            /*  bottomNavigationBar: BottomNavigationBar(
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_max_outlined),
-                  label: 'Home',
-                  backgroundColor: Colors.black,
-                ),
-              ],
-            ), */
             backgroundColor: Colors.transparent,
             body: ListView(
               // shrinkWrap: true,
