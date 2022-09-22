@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trading_courses/home_screen/models/review_model.dart';
 
 import '../models/course_model.dart';
 
@@ -10,6 +11,8 @@ class Courses extends ChangeNotifier {
   String subTitle = "";
   late Map<String, dynamic> courseContent;
  */
+
+
   final List<Course> _freeCourses = [
     Course(
         id: '1',
@@ -46,7 +49,21 @@ class Courses extends ChangeNotifier {
         author: 'Tushar R. Ghone',
         tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
-        isExpanded: false),
+        isExpanded: false,
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ]),
     Course(
         id: '2',
         courseName: 'Money Making Trading Course',
@@ -86,7 +103,21 @@ class Courses extends ChangeNotifier {
         author: 'Tushar R. Ghone',
         tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
-        isExpanded: false),
+        isExpanded: false,
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ]),
     Course(
         id: '3',
         courseName: 'Money Making Trading Course',
@@ -122,7 +153,21 @@ class Courses extends ChangeNotifier {
         author: 'Tushar R. Ghone',
         tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
-        isExpanded: false),
+        isExpanded: false,
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ]),
     Course(
         id: '4',
         courseName: 'Money Making Trading Course',
@@ -158,11 +203,39 @@ class Courses extends ChangeNotifier {
         author: 'Tushar R. Ghone',
         tags: ['Stock Market', 'Trading', 'nifty50', 'NSE', 'BSE'],
         subTitle: 'Learn and grow your wealth for your future days',
-        isExpanded: false)
+        isExpanded: false,
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ])
   ];
 
   final List<Course> _paidCourses = [
     Course(
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ],
         id: '1',
         courseName: 'Money Making Trading Course',
         genre: 'Stock Market',
@@ -199,6 +272,20 @@ class Courses extends ChangeNotifier {
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false),
     Course(
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ],
         id: '2',
         courseName: 'Money Making Trading Course',
         genre: 'Stock Market',
@@ -238,6 +325,20 @@ class Courses extends ChangeNotifier {
         id: '3',
         courseName: 'Money Making Trading Course',
         genre: 'Stock Market',
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
+        ],
         stars: 4.8,
         enrollCount: '1200+',
         price: '999',
@@ -292,6 +393,20 @@ class Courses extends ChangeNotifier {
             "module2": ["class1", "class2"],
             'isExpanded': false
           }
+        ],
+        reviews: [
+          reviewModel(
+              id: '1',
+              name: 'Joyesh Choaudhary',
+              stars: 4,
+              description:
+                  'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
+          reviewModel(
+              id: '2',
+              name: 'Harish Kumar',
+              stars: 4,
+              description:
+                  'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
         ],
         bgColor: const Color(0xffE9F4EC),
         bannerImage: 'assets/images/course_2.png',

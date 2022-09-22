@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trading_courses/home_screen/models/review_model.dart';
 
 class Course with ChangeNotifier {
   String courseName;
@@ -20,11 +21,13 @@ class Course with ChangeNotifier {
   List<String> tags;
   List<String> requirments;
   String genre;
+  List<reviewModel> reviews;
   Course(
       {required this.id,
       required this.courseName,
       required this.genre,
       required this.tags,
+      required this.reviews,
       required this.isExpanded,
       required this.requirments,
       required this.description,
