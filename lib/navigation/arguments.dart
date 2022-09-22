@@ -14,3 +14,8 @@ class CourseDetailScreenArguments {
   final int id;
   CourseDetailScreenArguments({required this.id});
 }
+
+class CourseEnrolledScreenArguments {
+  final int id;
+  CourseEnrolledScreenArguments({required this.id});
+}

@@ -17,9 +17,10 @@ class TitleText extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-            fontSize: 16,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w700),
+          fontSize: 16,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

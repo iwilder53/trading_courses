@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:trading_courses/navigation/arguments.dart';
 import 'package:trading_courses/navigation/navigators.dart';
-
 import '../providers/courses.dart';
 import '../widgets/TitleText.dart';
+import '../widgets/about_instructor.dart';
+import '../widgets/bullet_points.dart';
+import 'course_ernrolled.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   final int id;
@@ -30,12 +33,13 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     final dH = dS.height;
     final courseData = Provider.of<Courses>(context);
     final courseDetails = courseData.freeCourses[widget.id];
+
     get_chip(name) {
       return Chip(
-          padding: EdgeInsets.all(-2),
-          shape: RoundedRectangleBorder(
+          padding: const EdgeInsets.all(-2),
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
-          backgroundColor: Color(0xff3199D8),
+          backgroundColor: const Color(0xff3199D8),
           label: Text(
             "#${name}",
             style: Theme.of(context).textTheme.labelSmall!.copyWith(
@@ -51,25 +55,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     }
 
     List<Map<String, dynamic>> _items = List.generate(
-        2,
+        courseDetails.curriculum.length,
         // courseDetails.curriculum.length,
         (index) => {
-              'title': courseDetails.curriculum[index].keys.first.toString(),
-              'courses': // ['s', 's', 's'],
-                  courseDetails.curriculum[0]
-                      [courseDetails.curriculum[0].keys.first.toString()],
-              //'courses': courseDetails.curriculum[index].values.toList()[index],
-              'isExpanded': courseDetails.isExpanded
+              'title': courseDetails.curriculum[index].name,
+              'courses': courseDetails.curriculum[index].videos,
+              'isExpanded': courseDetails.curriculum[index].isExpanded
             },
         growable: false);
 
     //  List _courseModules
     void printCurriculum(int index, bool isExpanded) {
-      courseData.expand((index + 1).toString());
-      // print(_items[0].toString());
-      //  print(courseDetails.curriculum[0][0].entries);
-      print(courseDetails.curriculum[1]
-          [courseDetails.curriculum[1].keys.first.toString()]);
+      courseData.expand(courseDetails.id, index);
+
+      print(courseDetails.curriculum[1].videos.toString());
     }
 
     return Container(
@@ -153,16 +152,29 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                             child: SvgPicture.asset('assets/svg/star.svg'),
                           ),
                           Text(
-                            '${courseDetails.stars}(${courseDetails.enrollCount})Enrolled',
+                            '${courseDetails.stars} (${courseDetails.enrollCount})Enrolled',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                    fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
                       OutlinedButton(
                         onPressed: () {
-                          courseData.enrollFree(courseDetails.id);
+                          courseDetails.enrolled
+                              ? null
+                              : courseData.enrollFree(courseDetails.id);
+
                           if (kDebugMode) {
-                            print(courseDetails.enrolled);
+                            print(courseDetails.enrolled.toString() +
+                                courseDetails.id);
                           }
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CourseEnrolledScreen(
+                                    id: widget.id,
+                                  )));
                         },
                         style: OutlinedButton.styleFrom(
                           side:
@@ -185,14 +197,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    Text('beginner'),
-                    Text('20 modules'),
-                    Text('4 hours'),
-                  ],
-                ),
+                BulletPoints(courseDetails: courseDetails),
                 Padding(
                   padding: EdgeInsets.only(top: dH * 0.04),
                   child: Column(
@@ -394,84 +399,16 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     ],
                   ),
                 ),
-                TitleText(title: 'About Instructor'),
-                Container(
-                    padding: EdgeInsets.all(12),
-                    /*  margin: EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                  ), */
-                    height: dW * 0.25,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            width: dW * 0.2,
-                            child: Image.asset('assets/images/course_1.png')),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                courseDetails.author,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline1!
-                                    .copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
-                              ),
-                              Text(
-                                'SEBI Registered Advisor',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline1!
-                                    .copyWith(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500),
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                        'assets/images/Vector-2.png'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child:
-                                        Image.asset('assets/images/Vector.png'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                        'assets/images/Facebook.png'),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Image.asset('assets/images/Chevron.png'))
-                      ],
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                const TitleText(title: 'About Instructor'),
+                AboutInstructor(dW: dW, courseDetails: courseDetails),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16.0),
                   child: TitleText(title: 'Tags'),
                 ),
                 Container(
                   height: dW * 0.2,
                   width: dW * 0.2,
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Wrap(
                     spacing: 8.0,
                     runSpacing: 4.0,
@@ -480,14 +417,14 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                 ),
                 const TitleText(title: 'Reviews'),
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   height: dW,
                   width: dW,
                   child: Column(
                     children: [
                       ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) {
                             return Container(
@@ -495,23 +432,46 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(courseDetails.reviews[index].name
-                                        .toString()),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset('assets/svg/star.svg'),
-                                        SvgPicture.asset('assets/svg/star.svg'),
-                                        SvgPicture.asset('assets/svg/star.svg'),
-                                        SvgPicture.asset('assets/svg/star.svg')
-                                      ],
+                                    Text(
+                                      courseDetails.reviews[index].name
+                                          .toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline3!
+                                          .copyWith(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black),
                                     ),
-                                    Text(courseDetails
-                                        .reviews[index].description)
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6.0),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/svg/star.svg'),
+                                          SvgPicture.asset(
+                                              'assets/svg/star.svg'),
+                                          SvgPicture.asset(
+                                              'assets/svg/star.svg'),
+                                          SvgPicture.asset(
+                                              'assets/svg/star.svg')
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 12.0),
+                                      child: Text(courseDetails
+                                          .reviews[index].description),
+                                    )
                                   ]),
                             );
                           }),
                       TextButton(
-                          onPressed: () {}, child: Text('See More Reviews'))
+                          onPressed: () {},
+                          child: const Text('See More Reviews'))
                     ],
                   ),
                 ),
@@ -522,31 +482,37 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Container(
-            padding: EdgeInsets.all(16),
-            height: 100,
+            //  decoration: BoxDecoration(boxShadow: BoxShadow(offset: 10)),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            height: dW * 0.15,
             width: dW,
             child: FloatingActionButton(
+              elevation: 15.0,
+
               backgroundColor: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'ENROLL NOW',
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: Color(0xff3199D8),
-                        fontFamily: 'Montserrat',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  Image.asset('assets/images/Chevron.png'),
-                ],
-              ), //child widget inside this button
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               onPressed: () {
                 print("Button is pressed.");
                 //task to execute when this button is pressed
               },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'ENROLL NOW',
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: const Color(0xff3199D8),
+                          fontFamily: 'Montserrat',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Image.asset('assets/images/Chevron.png'),
+                  ],
+                ),
+              ), //
             ),
           ),
         ));

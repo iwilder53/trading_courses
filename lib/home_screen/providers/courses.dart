@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trading_courses/home_screen/models/module_model.dart';
 import 'package:trading_courses/home_screen/models/review_model.dart';
 
 import '../models/course_model.dart';
@@ -12,7 +13,6 @@ class Courses extends ChangeNotifier {
   late Map<String, dynamic> courseContent;
  */
 
-
   final List<Course> _freeCourses = [
     Course(
         id: '1',
@@ -23,23 +23,34 @@ class Courses extends ChangeNotifier {
         price: 'FREE',
         requirments: ['Smartphone', 'Demat account'],
         enrolled: false,
+        duration: '4',
+        difficulty: 'Begginer',
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: [
+            'How to access MMTC course',
+            'How to get connected to the community ',
+            'How to complete the course?'
+          ]),
+          Module(id: '2', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '3', name: 'Tools of trading', videos: ['', '', '']),
         ],
+        // curriculum: [
+        //   {
+        //     "01 - Welcome Session": [
+        //       "How to access MMTC course ",
+        //       "How to get connected to the community ",
+        //       "How to complete the course?"
+        //     ],
+        //     'isExpanded': true
+        //   },
+        //   {
+        //     "module2": ["class1", "class2"],
+        //     'isExpanded': false
+        //   }
+        // ],
         bgColor: const Color(0xffE9F4EC),
-        bannerImage: 'assets/images/course_2.png',
-        bannerText: 'Begginer to Expert\n in less than a week\n time',
+        bannerImage: 'assets/images/course_1.png',
+        bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
         courseContent: {
           "module_1": ["somehting", "somehting2"],
@@ -51,13 +62,13 @@ class Courses extends ChangeNotifier {
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false,
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -66,30 +77,19 @@ class Courses extends ChangeNotifier {
         ]),
     Course(
         id: '2',
-        courseName: 'Money Making Trading Course',
+        courseName: 'Stock Market Basics Course',
         genre: 'Stock Market',
         stars: 4.8,
         enrollCount: '1200+',
-        price: '999',
+        price: 'FREE',
+         duration: '4',
+        difficulty: 'Begginer',
         requirments: ['Smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          },
-          {
-            "module3": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         bgColor: const Color(0xffE9F4EC),
         bannerImage: 'assets/images/course_2.png',
@@ -105,13 +105,13 @@ class Courses extends ChangeNotifier {
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false,
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -124,22 +124,15 @@ class Courses extends ChangeNotifier {
         genre: 'Stock Market',
         stars: 4.8,
         enrollCount: '1200+',
-        price: '999',
+        price: 'FREE',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
+         duration: '4',
+        difficulty: 'Begginer',
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         bgColor: const Color(0xffE9F4EC),
         bannerImage: 'assets/images/course_2.png',
@@ -155,13 +148,13 @@ class Courses extends ChangeNotifier {
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false,
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -170,30 +163,23 @@ class Courses extends ChangeNotifier {
         ]),
     Course(
         id: '4',
-        courseName: 'Money Making Trading Course',
+        courseName: 'Stock Market Basics Course',
         genre: 'Stock Market',
         stars: 4.8,
         enrollCount: '1200+',
-        price: '999',
+        price: 'FREE',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
+         duration: '4',
+        difficulty: 'Begginer',
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         bgColor: const Color(0xffE9F4EC),
         bannerImage: 'assets/images/course_2.png',
-        bannerText: 'Begginer to Expert\n in less than a week\n time',
+        bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
         courseContent: {
           "module_1": ["somehting", "somehting2"],
@@ -205,13 +191,13 @@ class Courses extends ChangeNotifier {
         subTitle: 'Learn and grow your wealth for your future days',
         isExpanded: false,
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -223,13 +209,14 @@ class Courses extends ChangeNotifier {
   final List<Course> _paidCourses = [
     Course(
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
+              
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -242,25 +229,18 @@ class Courses extends ChangeNotifier {
         stars: 4.8,
         enrollCount: '1200+',
         price: '999',
+         duration: '4',
+        difficulty: 'Begginer',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         bgColor: const Color(0xffE9F4EC),
-        bannerImage: 'assets/images/course_2.png',
-        bannerText: 'Begginer to Expert\n in less than a week\n time',
+        bannerImage: 'assets/images/course_1.png',
+        bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
         courseContent: {
           "module_1": ["somehting", "somehting2"],
@@ -273,13 +253,13 @@ class Courses extends ChangeNotifier {
         isExpanded: false),
     Course(
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -290,23 +270,16 @@ class Courses extends ChangeNotifier {
         courseName: 'Money Making Trading Course',
         genre: 'Stock Market',
         stars: 4.8,
+         duration: '4',
+        difficulty: 'Begginer',
         enrollCount: '1200+',
         price: '999',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         bgColor: const Color(0xffE9F4EC),
         bannerImage: 'assets/images/course_2.png',
@@ -326,13 +299,13 @@ class Courses extends ChangeNotifier {
         courseName: 'Money Making Trading Course',
         genre: 'Stock Market',
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -340,27 +313,20 @@ class Courses extends ChangeNotifier {
                   'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
         ],
         stars: 4.8,
+         duration: '4',
+        difficulty: 'Begginer',
         enrollCount: '1200+',
         price: '999',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         bgColor: const Color(0xffE9F4EC),
-        bannerImage: 'assets/images/course_2.png',
-        bannerText: 'Begginer to Expert\n in less than a week\n time',
+        bannerImage: 'assets/images/course_1.png',
+        bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
         courseContent: {
           "module_1": ["somehting", "somehting2"],
@@ -378,30 +344,23 @@ class Courses extends ChangeNotifier {
         stars: 4.8,
         enrollCount: '1200+',
         price: '999',
+         duration: '4',
+        difficulty: 'Begginer',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
-          {
-            "01 - Welcome Session": [
-              "How to access MMTC course ",
-              "How to get connected to the community ",
-              "How to complete the course?"
-            ],
-            'isExpanded': true
-          },
-          {
-            "module2": ["class1", "class2"],
-            'isExpanded': false
-          }
+          Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
+          Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
+          Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
         reviews: [
-          reviewModel(
+          ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
-          reviewModel(
+          ReviewModel(
               id: '2',
               name: 'Harish Kumar',
               stars: 4,
@@ -437,10 +396,11 @@ class Courses extends ChangeNotifier {
     notifyListeners();
   }
 
-  void expand(String id) {
+  void expand(String id, int index) {
     final courseToExpand = _freeCourses.firstWhere((crs) => crs.id == id);
-    courseToExpand.isExpanded = !courseToExpand.isExpanded;
-    print(courseToExpand.isExpanded.toString());
+    courseToExpand.curriculum[index].isExpanded =
+        !courseToExpand.curriculum[index].isExpanded;
+    print(id.toString());
     notifyListeners();
   }
 

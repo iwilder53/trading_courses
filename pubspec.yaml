@@ -95,6 +95,10 @@ flutter:
     - assets/images/Vector.png
     - assets/images/Chevron.png
     - assets/images/Facebook.png
+    - assets/svg/Vector-2.svg
+    - assets/svg/Vector-1.svg
+    - assets/svg/Vector.svg
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

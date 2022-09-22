@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trading_courses/home_screen/models/review_model.dart';
 
+import 'module_model.dart';
+
 class Course with ChangeNotifier {
   String courseName;
   String id;
@@ -17,11 +19,13 @@ class Course with ChangeNotifier {
   Map<String, dynamic> courseContent;
   bool isExpanded;
   String enrollCount;
-  List<Map<String, dynamic>> curriculum;
+  List<Module> curriculum;
   List<String> tags;
   List<String> requirments;
   String genre;
-  List<reviewModel> reviews;
+  String duration;
+  String difficulty;
+  List<ReviewModel> reviews;
   Course(
       {required this.id,
       required this.courseName,
@@ -32,6 +36,8 @@ class Course with ChangeNotifier {
       required this.requirments,
       required this.description,
       required this.stars,
+      required this.duration,
+      required this.difficulty,
       required this.author,
       required this.price,
       required this.enrolled,

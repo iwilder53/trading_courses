@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:trading_courses/Authentication/screens/welcome_screen.dart';
+import 'package:trading_courses/navigation/arguments.dart';
 import '../Authentication/screens/info_registration_screen.dart';
 import '../Authentication/screens/otp_screen.dart';
 import '../Authentication/screens/photo_screen.dart';
 import '../home_screen/screens/course_details.dart';
-import 'arguments.dart';
 import 'routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -18,6 +18,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case NamedRoute.photoScreen:
       return _getPageRoute(const PhotoScreen());
     case NamedRoute.courseDetailScreen:
+      return _getPageRoute(CourseDetailScreen(
+        id: settings.arguments as int,
+      ));
+    case NamedRoute.courseEnrolledScreen:
       return _getPageRoute(CourseDetailScreen(
         id: settings.arguments as int,
       ));

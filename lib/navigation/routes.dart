@@ -4,5 +4,5 @@ class NamedRoute {
   static const String photoScreen = '/PhotoScreen';
   static const String infoRegistrationScreen = '/infoRegistrationScreen';
   static const String courseDetailScreen = '/CourseDetailScreen';
-  static const String courseEnrolledScreen = '/courseEnrolledScreen';
+  static const String courseEnrolledScreen = '/CourseEnrolledScreen';
 }
