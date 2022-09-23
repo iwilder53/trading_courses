@@ -3,10 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/courses.dart';
+import '../screens/course_details.dart';
+import '../screens/course_ernrolled.dart';
 
 class PaidCourses extends StatelessWidget {
   const PaidCourses({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final dS = MediaQuery.of(context).size;
@@ -15,7 +17,7 @@ class PaidCourses extends StatelessWidget {
     final courseData = Provider.of<Courses>(context);
     final paidCourses = courseData.paidCourses;
     return SizedBox(
-        height: dH * 0.42,
+        height: dW * 0.8,
         child: ListView.builder(
           // shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -30,15 +32,23 @@ class PaidCourses extends StatelessWidget {
                   color: paidCourses[i].bgColor,
                   border: Border.all(color: const Color(0xffC6D7F9)),
                   borderRadius: const BorderRadius.all(Radius.circular(8.0))),
-              margin: const EdgeInsets.all(16),
+              margin: const EdgeInsets.all(8),
               width: dW * 0.8,
               height: dH * 0.3,
               child: InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () {
-                     
-                    
+                    print(
+                        paidCourses[i].enrolled.toString() + paidCourses[i].id);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => paidCourses[i].enrolled
+                            ? CourseEnrolledScreen(
+                                id: int.parse(paidCourses[i].id) - 1,
+                              )
+                            : CourseDetailScreen(
+                                id: int.parse(paidCourses[i].id) - 1,
+                              )));
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +59,8 @@ class PaidCourses extends StatelessWidget {
                         child: Row(
                           children: [
                             SvgPicture.asset('assets/svg/star.svg'),
-                            Text('${paidCourses[i].stars} (${paidCourses[i].reviewCount})'),
+                            Text(
+                                '${paidCourses[i].stars} (${paidCourses[i].reviewCount})'),
                           ],
                         ),
                       ),
@@ -63,7 +74,8 @@ class PaidCourses extends StatelessWidget {
                           Container(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                                style: const TextStyle(color: Color(0xff4C6FFF)),
+                                style:
+                                    const TextStyle(color: Color(0xff4C6FFF)),
                                 textAlign: TextAlign.right,
                                 paidCourses[i].bannerText),
                           )

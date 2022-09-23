@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 import '../models/course_model.dart';
+import '../screens/instructor.dart';
 
 class AboutInstructor extends StatelessWidget {
   const AboutInstructor({
@@ -12,6 +12,7 @@ class AboutInstructor extends StatelessWidget {
 
   final double dW;
   final Course courseDetails;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -37,42 +38,33 @@ class AboutInstructor extends StatelessWidget {
                 children: [
                   Text(
                     courseDetails.author,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
+                    style: Theme.of(context).textTheme.headline1!.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
                   ),
                   Text(
                     'SEBI Registered Advisor',
                     style: Theme.of(context)
                         .textTheme
                         .headline1!
-                        .copyWith(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500),
+                        .copyWith(fontSize: 12, fontWeight: FontWeight.w500),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                            'assets/images/Vector-2.png'),
+                        child: Image.asset('assets/images/Vector-2.png'),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child:
-                            Image.asset('assets/images/Vector.png'),
+                        child: Image.asset('assets/images/Vector.png'),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                            'assets/images/Facebook.png'),
+                        child: Image.asset('assets/images/Facebook.png'),
                       ),
                     ],
                   )
@@ -80,7 +72,10 @@ class AboutInstructor extends StatelessWidget {
               ),
             ),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => InstructorScreen(id: 1,)));
+                },
                 icon: Image.asset('assets/images/Chevron.png'))
           ],
         ));

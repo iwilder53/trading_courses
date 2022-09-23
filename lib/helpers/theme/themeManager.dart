@@ -36,7 +36,7 @@ class ThemeNotifier with ChangeNotifier {
 
     backgroundColor: Colors.white,
 
-    dividerColor: Colors.white54,
+    dividerColor: Colors.transparent,
     disabledColor: Colors.purple[300],
     textTheme: const TextTheme(
       headline1: TextStyle(

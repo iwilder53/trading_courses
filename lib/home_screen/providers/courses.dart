@@ -5,14 +5,6 @@ import 'package:trading_courses/home_screen/models/review_model.dart';
 import '../models/course_model.dart';
 
 class Courses extends ChangeNotifier {
-  /*  String courseName = "";
-  String description = "";
-  bool enrolled = false;
-  String id = "";
-  String subTitle = "";
-  late Map<String, dynamic> courseContent;
- */
-
   final List<Course> _freeCourses = [
     Course(
         id: '1',
@@ -34,21 +26,7 @@ class Courses extends ChangeNotifier {
           Module(id: '2', name: 'Concepts of trading', videos: ['', '', '']),
           Module(id: '3', name: 'Tools of trading', videos: ['', '', '']),
         ],
-        // curriculum: [
-        //   {
-        //     "01 - Welcome Session": [
-        //       "How to access MMTC course ",
-        //       "How to get connected to the community ",
-        //       "How to complete the course?"
-        //     ],
-        //     'isExpanded': true
-        //   },
-        //   {
-        //     "module2": ["class1", "class2"],
-        //     'isExpanded': false
-        //   }
-        // ],
-        bgColor: const Color(0xffE9F4EC),
+        bgColor: const Color(0xffC6D7F9),
         bannerImage: 'assets/images/course_1.png',
         bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
@@ -82,7 +60,7 @@ class Courses extends ChangeNotifier {
         stars: 4.8,
         enrollCount: '1200+',
         price: 'FREE',
-         duration: '4',
+        duration: '4',
         difficulty: 'Begginer',
         requirments: ['Smartphone', 'Demat account'],
         enrolled: false,
@@ -127,14 +105,14 @@ class Courses extends ChangeNotifier {
         price: 'FREE',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
-         duration: '4',
+        duration: '4',
         difficulty: 'Begginer',
         curriculum: [
           Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
           Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
           Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
-        bgColor: const Color(0xffE9F4EC),
+        bgColor: const Color(0xffC6D7F9),
         bannerImage: 'assets/images/course_2.png',
         bannerText: 'Begginer to Expert\n in less than a week\n time',
         reviewCount: '1200+',
@@ -170,7 +148,7 @@ class Courses extends ChangeNotifier {
         price: 'FREE',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
-         duration: '4',
+        duration: '4',
         difficulty: 'Begginer',
         curriculum: [
           Module(id: '1', name: 'Welcome session', videos: ['', '', '']),
@@ -213,7 +191,6 @@ class Courses extends ChangeNotifier {
               id: '1',
               name: 'Joyesh Choaudhary',
               stars: 4,
-              
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
           ReviewModel(
@@ -228,8 +205,8 @@ class Courses extends ChangeNotifier {
         genre: 'Stock Market',
         stars: 4.8,
         enrollCount: '1200+',
-        price: '999',
-         duration: '4',
+        price: '₹999',
+        duration: '4',
         difficulty: 'Begginer',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
@@ -238,7 +215,7 @@ class Courses extends ChangeNotifier {
           Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
           Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
-        bgColor: const Color(0xffE9F4EC),
+        bgColor: const Color(0xffC6D7F9),
         bannerImage: 'assets/images/course_1.png',
         bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
@@ -267,13 +244,13 @@ class Courses extends ChangeNotifier {
                   'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
         ],
         id: '2',
-        courseName: 'Money Making Trading Course',
+        courseName: 'Stock Market Basics Course',
         genre: 'Stock Market',
         stars: 4.8,
-         duration: '4',
+        duration: '4',
         difficulty: 'Begginer',
         enrollCount: '1200+',
-        price: '999',
+        price: '₹499',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
@@ -313,10 +290,10 @@ class Courses extends ChangeNotifier {
                   'I loved this course. Its exactly what I wanted to learn twenty years ago. Its really helpful to a beginner starting to trading.')
         ],
         stars: 4.8,
-         duration: '4',
+        duration: '4',
         difficulty: 'Begginer',
         enrollCount: '1200+',
-        price: '999',
+        price: '₹999',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
         curriculum: [
@@ -324,7 +301,7 @@ class Courses extends ChangeNotifier {
           Module(id: '1', name: 'Concepts of trading', videos: ['', '', '']),
           Module(id: '1', name: 'Tools of trading', videos: ['', '', '']),
         ],
-        bgColor: const Color(0xffE9F4EC),
+        bgColor: const Color(0xffC6D7F9),
         bannerImage: 'assets/images/course_1.png',
         bannerText: 'Learn and grow your\nwealth for\nyour future days',
         reviewCount: '1200+',
@@ -339,12 +316,12 @@ class Courses extends ChangeNotifier {
         isExpanded: false),
     Course(
         id: '4',
-        courseName: 'Money Making Trading Course',
+        courseName: 'Stock Market Basics Course',
         genre: 'Stock Market',
         stars: 4.8,
         enrollCount: '1200+',
-        price: '999',
-         duration: '4',
+        price: '₹499',
+        duration: '4',
         difficulty: 'Begginer',
         requirments: ['smartphone', 'Demat account'],
         enrolled: false,
@@ -402,6 +379,21 @@ class Courses extends ChangeNotifier {
         !courseToExpand.curriculum[index].isExpanded;
     print(id.toString());
     notifyListeners();
+  }
+
+  List<Course> authorCourses(String name) {
+    List<Course> courses = [];
+    for (int i = 0; i < _freeCourses.length; i++) {
+      if (_freeCourses[i].author.contains(name)) {
+        courses.add(_freeCourses[i]);
+      }
+    }
+    for (int i = 0; i < _paidCourses.length; i++) {
+      if (_paidCourses[i].author.contains(name)) {
+        courses.add(_paidCourses[i]);
+      }
+    }
+    return courses;
   }
 
   void enrollPaid(String id) {

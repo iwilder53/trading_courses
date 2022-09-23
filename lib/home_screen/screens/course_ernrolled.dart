@@ -202,12 +202,84 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     color: Colors.transparent,
-                    //  height: dW,
+                    height: dW * 0.8,
                     width: dH,
-                    child: SingleChildScrollView(
+                    child: ListView.builder(
+                        itemCount: _items.length,
+                        itemBuilder: (_, index) {
+                          final item = _items[index];
+                          return /* Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(24))),
+                            child: */
+                              Card(
+                            key: PageStorageKey(item['id']),
+                            color: Colors.transparent,
+                            elevation: 4,
+                            child: ExpansionTile(
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              childrenPadding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              expandedCrossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                              maintainState: true,
+                              title: Text(item['title']),
+                              // contents
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    item['courses'][0],
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline1!
+                                        .copyWith(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    item['courses'][1],
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline1!
+                                        .copyWith(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    item['courses'][2],
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline1!
+                                        .copyWith(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // ),
+                          );
+                        }),
+                    /* SingleChildScrollView(
                       physics: const NeverScrollableScrollPhysics(),
                       child: ExpansionPanelList(
                         elevation: 0,
+                        dividerColor: Colors.transparent,
+                        expandedHeaderPadding: EdgeInsets.all(2),
                         expansionCallback: (index, isExpanded) {
                           printCurriculum(index, isExpanded);
                         },
@@ -217,31 +289,68 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                               (item) => ExpansionPanel(
                                 backgroundColor: Colors.transparent,
                                 canTapOnHeader: true,
-                                headerBuilder: (_, isExpanded) => Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "0${item['id']}",
-                                    ),
-                                    Container(
-                                        //color: Colors.white,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 15, horizontal: 30),
-                                        child: Text(
-                                          item['title'],
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline1!
-                                              .copyWith(
-                                                  fontFamily: 'Montserrat',
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.black),
-                                        )),
-                                  ],
-                                ),
+                                headerBuilder: (_, isExpanded) => Stack(
+                                    // alignment: Alignment.centerRight,
+                                    children: [
+                                      Align(
+                                        //  alignment: Alignment.centerRight,
+                                        child: Container(
+                                          margin:
+                                              EdgeInsets.only(left: dW * 0.05),
+                                          width: dW,
+                                          height: dW * 0.1,
+                                          decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8))),
+                                        ),
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "0${item['id']} ",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline1!
+                                                .copyWith(
+                                                    fontFamily: 'Montserrat',
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black),
+                                          ),
+                                          Container(
+                                              height: dW * 0.11,
+                                              width: dW * 0.6,
+                                              decoration: const BoxDecoration(
+                                                  //   color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(8))),
+                                              alignment: Alignment.centerLeft,
+                                              padding: EdgeInsets.only(
+                                                left: dW * 0.02,
+                                              ),
+                                              child: Text(
+                                                item['title'],
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline1!
+                                                    .copyWith(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: Colors.black),
+                                              )),
+                                        ],
+                                      ),
+                                    ]),
                                 body: Padding(
-                                  // color: Colors.transparent,
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 15, horizontal: 30),
                                   child: Column(
@@ -298,7 +407,7 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                             )
                             .toList(),
                       ),
-                    ),
+                    ), */
                   ),
                 ),
               ],

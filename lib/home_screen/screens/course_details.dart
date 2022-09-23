@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:trading_courses/navigation/arguments.dart';
 import 'package:trading_courses/navigation/navigators.dart';
 import '../providers/courses.dart';
 import '../widgets/TitleText.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/Authentication/screens/welcome_screen.dart';
+import 'package:trading_courses/home_screen/providers/instructor_provider.dart';
 import 'package:trading_courses/home_screen/providers/quiz_provider.dart';
 
 import 'helpers/theme/themeManager.dart';
