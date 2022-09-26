@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:trading_courses/home_screen/screens/course_details.dart';
-import 'package:trading_courses/navigation/navigators.dart';
-import 'package:trading_courses/navigation/routes.dart';
 
 import '../models/course_model.dart';
 import '../screens/course_ernrolled.dart';
 
-class authorCourseList extends StatelessWidget {
-  const authorCourseList({
+class AuthorCourseList extends StatelessWidget {
+  const AuthorCourseList({
     Key? key,
     required this.dW,
     required this.index,
@@ -29,7 +27,8 @@ class authorCourseList extends StatelessWidget {
                   )
                 : CourseDetailScreen(
                     id: int.parse(coursesOffered[index].id) - 1,
-                  )));
+                    free:
+                        coursesOffered[index].price == 'FREE' ? true : false)));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8.0),

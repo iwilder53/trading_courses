@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/cart/Provider/cart_provider.dart';
 import 'package:trading_courses/cart/screens/checkout_screen.dart';
+import 'package:trading_courses/home_screen/screens/course_ernrolled.dart';
 import 'package:trading_courses/navigation/navigators.dart';
 import '../providers/courses.dart';
 import '../widgets/TitleText.dart';
@@ -14,7 +15,8 @@ import '../widgets/bullet_points.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   final int id;
-  const CourseDetailScreen({super.key, required this.id});
+  final bool free;
+  const CourseDetailScreen({super.key, required this.id, required this.free});
 
   @override
   State<CourseDetailScreen> createState() => _CourseDetailScreenState();
@@ -34,7 +36,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     final dW = dS.width;
     final dH = dS.height;
     final courseData = Provider.of<Courses>(context);
-    final courseDetails = courseData.paidCourses[widget.id];
+
+    final courseDetails = widget.free
+        ? courseData.freeCourses[widget.id]
+        : courseData.paidCourses[widget.id];
 
     get_chip(name) {
       return Chip(
@@ -165,17 +170,25 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                       ),
                       OutlinedButton(
                         onPressed: () {
-                          /*   courseDetails.enrolled
-                              ? null
-                              : courseData.enrollFree(courseDetails.id); */
-                          Provider.of<CartProvider>(context, listen: false)
-                              .addCourse(courseDetails);
                           if (kDebugMode) {
                             print(courseDetails.enrolled.toString() +
                                 courseDetails.id);
                           }
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const CheckoutScreen()));
+
+                          if (widget.free) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => CourseEnrolledScreen(
+                                    id: int.parse(courseDetails.id))));
+                            !courseDetails.enrolled
+                                ? Provider.of<Courses>(context, listen: false)
+                                    .enrollFree(courseDetails.id)
+                                : null;
+                          } else {
+                            Provider.of<CartProvider>(context, listen: false)
+                                .addCourse(courseDetails);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const CheckoutScreen()));
+                          }
                         },
                         style: OutlinedButton.styleFrom(
                           side:
@@ -448,14 +461,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                                         vertical: 6.0),
                                     child: Row(
                                       children: [
-                                        SvgPicture.asset(
-                                            'assets/svg/star.svg'),
-                                        SvgPicture.asset(
-                                            'assets/svg/star.svg'),
-                                        SvgPicture.asset(
-                                            'assets/svg/star.svg'),
-                                        SvgPicture.asset(
-                                            'assets/svg/star.svg')
+                                        SvgPicture.asset('assets/svg/star.svg'),
+                                        SvgPicture.asset('assets/svg/star.svg'),
+                                        SvgPicture.asset('assets/svg/star.svg'),
+                                        SvgPicture.asset('assets/svg/star.svg')
                                       ],
                                     ),
                                   ),

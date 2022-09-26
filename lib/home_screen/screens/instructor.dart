@@ -159,7 +159,7 @@ class InstructorScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: instructor.coursesOffered.length,
                 itemBuilder: (context, index) {
-                  return authorCourseList(
+                  return AuthorCourseList(
                     dW: dW,
                     coursesOffered: coursesOffered,
                     index: index,

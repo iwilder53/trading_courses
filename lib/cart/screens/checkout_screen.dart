@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/cart/Provider/cart_provider.dart';
+import 'package:trading_courses/cart/screens/checkout_success.dart';
+import 'package:trading_courses/cart/widgets/delete_alert.dart';
 import 'package:trading_courses/home_screen/models/course_model.dart';
 import 'package:trading_courses/home_screen/widgets/TitleText.dart';
+import 'package:trading_courses/navigation/routes.dart';
 
 import '../../navigation/navigators.dart';
 
@@ -55,7 +58,9 @@ class CheckoutScreen extends StatelessWidget {
                         itemCount: coursesToShow.length,
                         itemBuilder: (context, index) {
                           return CourseWidget(
-                              coursesToShow: coursesToShow, dW: dW);
+                              coursesToShow: coursesToShow,
+                              dW: dW,
+                              index: index);
                         },
                       ),
                     ),
@@ -170,7 +175,7 @@ class CheckoutScreen extends StatelessWidget {
                           Text(
                             Provider.of<CartProvider>(context)
                                 .totalGst
-                                .toString(),
+                                .toStringAsFixed(2),
                             style: Theme.of(context)
                                 .textTheme
                                 .headline1!
@@ -236,7 +241,9 @@ class CheckoutScreen extends StatelessWidget {
                                     overflow: TextOverflow.clip),
                           ),
                           Text(
-                            Provider.of<CartProvider>(context).toPay.toString(),
+                            Provider.of<CartProvider>(context)
+                                .toPay
+                                .toStringAsFixed(2),
                             style: Theme.of(context)
                                 .textTheme
                                 .headline1!
@@ -283,6 +290,11 @@ class CheckoutScreen extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CheckoutSuccessfulScreen()),
+                  );
                   print("Button is pressed.");
                   //task to execute when this button is pressed
                 },
@@ -310,7 +322,9 @@ class CheckoutScreen extends StatelessWidget {
                                     overflow: TextOverflow.clip),
                           ),
                           Text(
-                            Provider.of<CartProvider>(context).toPay.toString(),
+                            Provider.of<CartProvider>(context)
+                                .toPay
+                                .toStringAsFixed(2),
                             style: Theme.of(context)
                                 .textTheme
                                 .headline1!
@@ -329,7 +343,7 @@ class CheckoutScreen extends StatelessWidget {
                             'CHECKOUT',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline5!
+                                .headline1!
                                 .copyWith(
                                     color: const Color(0xff3199D8),
                                     fontFamily: 'Montserrat',
@@ -351,14 +365,16 @@ class CheckoutScreen extends StatelessWidget {
 }
 
 class CourseWidget extends StatelessWidget {
-  const CourseWidget({
-    Key? key,
-    required this.coursesToShow,
-    required this.dW,
-  }) : super(key: key);
+  const CourseWidget(
+      {Key? key,
+      required this.coursesToShow,
+      required this.dW,
+      required this.index})
+      : super(key: key);
 
   final List<Course> coursesToShow;
   final double dW;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -375,7 +391,7 @@ class CourseWidget extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        coursesToShow[0].bannerImage,
+                        coursesToShow[index].bannerImage,
                         height: dW * 0.25,
                       )),
                 ),
@@ -387,7 +403,7 @@ class CourseWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
-                          coursesToShow[0].courseName,
+                          coursesToShow[index].courseName,
                           style: Theme.of(context)
                               .textTheme
                               .headline1!
@@ -403,7 +419,7 @@ class CourseWidget extends StatelessWidget {
                         children: [
                           SvgPicture.asset('assets/svg/star.svg'),
                           Text(
-                            coursesToShow[0].stars.toString(),
+                            coursesToShow[index].stars.toString(),
                             style: Theme.of(context)
                                 .textTheme
                                 .headline1!
@@ -417,7 +433,7 @@ class CourseWidget extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
-                              '(${coursesToShow[0].reviewCount})',
+                              '(${coursesToShow[index].reviewCount})',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline1!
@@ -432,7 +448,7 @@ class CourseWidget extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '₹${coursesToShow[0].price}',
+                        '₹${coursesToShow[index].price}',
                         style: Theme.of(context).textTheme.headline1!.copyWith(
                             fontFamily: 'Montserrat',
                             fontSize: 16,
@@ -449,8 +465,8 @@ class CourseWidget extends StatelessWidget {
           TextButton.icon(
               icon: SvgPicture.asset('assets/svg/Union.svg'),
               onPressed: () {
-                Provider.of<CartProvider>(context, listen: false)
-                    .removeCourse(coursesToShow[0]);
+                showAlertDialog(context, coursesToShow[index]);
+
                 print('object');
               },
               label: Text(

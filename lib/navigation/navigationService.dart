@@ -7,7 +7,9 @@ import 'package:trading_courses/navigation/arguments.dart';
 import '../Authentication/screens/info_registration_screen.dart';
 import '../Authentication/screens/otp_screen.dart';
 import '../Authentication/screens/photo_screen.dart';
+import '../cart/screens/checkout_success.dart';
 import '../home_screen/screens/course_details.dart';
+import '../home_screen/screens/course_ernrolled.dart';
 import 'routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -18,12 +20,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case NamedRoute.photoScreen:
       return _getPageRoute(const PhotoScreen());
+    case NamedRoute.checkoutSuccessfulScreen:
+      return _getPageRoute(const CheckoutSuccessfulScreen());
     case NamedRoute.courseDetailScreen:
       return _getPageRoute(CourseDetailScreen(
         id: settings.arguments as int,
+        free: settings.arguments as bool,
       ));
     case NamedRoute.courseEnrolledScreen:
-      return _getPageRoute(CourseDetailScreen(
+      return _getPageRoute(CourseEnrolledScreen(
         id: settings.arguments as int,
       ));
 

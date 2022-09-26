@@ -90,6 +90,9 @@ flutter:
     - assets/svg/bookmark.svg
     - assets/svg/forward_arrow.svg
     - assets/svg/complete.svg
+    - assets/svg/Confetti.svg   
+    - assets/svg/check-circle.svg
+
     - assets/images/quiz_logo.png
     - assets/images/Vector-2.png
     - assets/images/Vector.png

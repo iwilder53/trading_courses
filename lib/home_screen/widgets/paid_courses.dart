@@ -48,6 +48,7 @@ class PaidCourses extends StatelessWidget {
                               )
                             : CourseDetailScreen(
                                 id: int.parse(paidCourses[i].id) - 1,
+                                free: false,
                               )));
                   },
                   child: Column(

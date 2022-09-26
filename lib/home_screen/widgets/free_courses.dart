@@ -38,9 +38,11 @@ class FreeCourses extends StatelessWidget {
               child: InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onTap: () {
+                  onTap: () {/* 
                     print(
-                        freeCourses[i].enrolled.toString() + freeCourses[i].id);
+                        freeCourses[i].enrolled.toString() + freeCourses[i].id); */
+                
+                
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => freeCourses[i].enrolled
                             ? CourseEnrolledScreen(
@@ -48,6 +50,8 @@ class FreeCourses extends StatelessWidget {
                               )
                             : CourseDetailScreen(
                                 id: int.parse(freeCourses[i].id) - 1,
+                                free: true,
+                               
                               )));
                   },
                   child: Column(

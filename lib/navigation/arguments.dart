@@ -12,7 +12,8 @@ class OtpScreenArguments {
 
 class CourseDetailScreenArguments {
   final int id;
-  CourseDetailScreenArguments({required this.id});
+  final bool free;
+  CourseDetailScreenArguments({required this.id,required this.free});
 }
 
 class CourseEnrolledScreenArguments {

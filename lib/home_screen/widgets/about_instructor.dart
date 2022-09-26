@@ -28,7 +28,7 @@ class AboutInstructor extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
+            SizedBox(
                 width: dW * 0.2,
                 child: Image.asset('assets/images/course_1.png')),
             Padding(
