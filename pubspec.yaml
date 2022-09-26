@@ -98,6 +98,11 @@ flutter:
     - assets/svg/Vector-2.svg
     - assets/svg/Vector-1.svg
     - assets/svg/Vector.svg
+    - assets/images/share.png
+    - assets/svg/Discount.svg
+    - assets/svg/Rectangle.svg
+    - assets/svg/Union.svg
+    - assets/svg/Wallet.svg
 
 
 

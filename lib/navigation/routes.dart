@@ -6,4 +6,5 @@ class NamedRoute {
   static const String courseDetailScreen = '/CourseDetailScreen';
   static const String courseEnrolledScreen = '/CourseEnrolledScreen';
   static const String instructorScreen = '/InstructorScreen';
+  static const String checkoutScreen = '/CheckoutScreen';
 }

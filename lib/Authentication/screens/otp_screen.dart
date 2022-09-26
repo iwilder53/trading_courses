@@ -28,37 +28,46 @@ class OtpScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: dH * 0.12,
             ),
-            Container(
-                margin: EdgeInsets.only(top: dH * 0.1),
-                alignment: Alignment.centerLeft,
-                //  padding: const EdgeInsets.only(left: 10),
-                child: SvgPicture.asset('assets/svg/mobile_login_icon.svg')),
-            Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(
-                  top: 20,
-                  bottom: 5,
-                ),
-                child: const Text(
-                  'Mobile Verification',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                )),
-            Container(
-                alignment: Alignment.centerLeft,
-                //  padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  'Enter your the six digit number sent to\n${args.mobNumber} ',
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w500),
-                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(top: dH * 0.1),
+                      alignment: Alignment.centerLeft,
+                      //  padding: const EdgeInsets.only(left: 10),
+                      child:
+                          SvgPicture.asset('assets/svg/mobile_login_icon.svg')),
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 5,
+                      ),
+                      child: const Text(
+                        'Mobile Verification',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                      )),
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      //  padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Enter your the six digit number sent to\n${args.mobNumber} ',
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w500),
+                      )),
+                ],
+              ),
+            ),
             SizedBox(
               width: dW,
               child: Form(
@@ -80,12 +89,12 @@ class OtpScreen extends StatelessWidget {
                         }
                       },
                       pinTheme: PinTheme(
-                        activeFillColor: Colors.blue,
+                        activeFillColor: Colors.black12,
                         inactiveColor: Colors.black,
                         shape: PinCodeFieldShape.underline,
                         borderRadius: BorderRadius.circular(5),
-                        fieldHeight: 60,
-                        fieldWidth: 50,
+                        fieldWidth: dW * 0.1,
+                        fieldHeight: dH * 0.06,
                       ),
                       textStyle: const TextStyle(fontSize: 20, height: 1.6),
                       // backgroundColor: Colors.blue.shade50,
@@ -94,7 +103,11 @@ class OtpScreen extends StatelessWidget {
                       // controller: textEditingController,
                       keyboardType: TextInputType.number,
 
-                      onCompleted: (v) {},
+                      onCompleted: (v) {
+                        if (_formKey.currentState!.validate()) {
+                          push(context, NamedRoute.photoScreen);
+                        }
+                      },
                       // onTap: () {
                       //   print("Pressed");
                       // },

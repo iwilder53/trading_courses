@@ -71,14 +71,11 @@ class FreeCourses extends StatelessWidget {
                               child: Image.asset(
                                 freeCourses[i].bannerImage,
                               )),
-                          Container(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                                style:
-                                    const TextStyle(color: Color(0xff4C6FFF)),
-                                textAlign: TextAlign.right,
-                                freeCourses[i].bannerText),
-                          )
+                          Text(
+                              style: const TextStyle(color: Color(0xff4C6FFF)),
+                              textAlign: TextAlign.right,
+                              overflow: TextOverflow.ellipsis,
+                              freeCourses[i].bannerText)
                         ],
                       ),
                       Container(
@@ -101,6 +98,7 @@ class FreeCourses extends StatelessWidget {
                               freeCourses[i].courseName,
                               style: (const TextStyle(
                                   fontFamily: 'Montserrat',
+                                  overflow: TextOverflow.ellipsis,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700)),
                             ),
@@ -108,6 +106,7 @@ class FreeCourses extends StatelessWidget {
                               textAlign: TextAlign.left,
                               freeCourses[i].subTitle,
                               style: (const TextStyle(
+                                  overflow: TextOverflow.ellipsis,
                                   fontFamily: 'Montserrat',
                                   fontSize: 10,
                                   fontWeight: FontWeight.w500,
@@ -121,6 +120,7 @@ class FreeCourses extends StatelessWidget {
                                   style: (const TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 10,
+                                      overflow: TextOverflow.ellipsis,
                                       fontWeight: FontWeight.w500,
                                       color: Color(0xff737373))),
                                 ),
@@ -129,6 +129,8 @@ class FreeCourses extends StatelessWidget {
                                   style: (const TextStyle(
                                       fontFamily: 'Montserrat',
                                       fontSize: 14,
+                                      overflow: TextOverflow.ellipsis,
+
                                       // fontWeight: FontWeight.w200,
                                       color: Color(0xff737373))),
                                 ),

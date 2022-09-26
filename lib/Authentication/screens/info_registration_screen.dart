@@ -93,11 +93,11 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
             ),
             Container(
                 //  alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(top: 40, bottom: dH * 0.02),
+                padding: EdgeInsets.only(top: 40, bottom: dH * 0.01),
                 child: SvgPicture.asset('assets/svg/profile_details.svg')),
             Container(
                 // alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                padding: const EdgeInsets.only(top: 10, bottom: 8),
                 child: const Text('Please enter the details below to continue',
                     textAlign: TextAlign.start,
                     style: TextStyle(

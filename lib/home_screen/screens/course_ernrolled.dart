@@ -1,8 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:trading_courses/home_screen/models/course_model.dart';
 import 'package:trading_courses/navigation/navigators.dart';
 
 import '../providers/courses.dart';
@@ -22,6 +23,7 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
   @override
   void initState() {
     super.initState();
+
   }
 
   // ignore: prefer_final_fields
@@ -33,6 +35,9 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
     final dH = dS.height;
     final courseData = Provider.of<Courses>(context);
     final courseDetails = courseData.freeCourses[widget.id];
+
+
+
     get_chip(name) {
       return Chip(
           padding: const EdgeInsets.all(-2),
@@ -40,7 +45,7 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
               borderRadius: BorderRadius.all(Radius.circular(5))),
           backgroundColor: const Color(0xff3199D8),
           label: Text(
-            "#${name}",
+            "#$name",
             style: Theme.of(context).textTheme.labelSmall!.copyWith(
                 fontFamily: 'Montserrat',
                 fontSize: 10,
@@ -94,7 +99,7 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                         icon: SvgPicture.asset('assets/svg/back_arrow.svg')),
                     IconButton(
                         onPressed: (() {}),
-                        icon: SvgPicture.asset('assets/svg/bookmark.svg')),
+                        icon: Image.asset('assets/images/share.png')),
                   ],
                 ),
                 Row(

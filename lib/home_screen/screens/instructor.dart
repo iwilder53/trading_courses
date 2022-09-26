@@ -1,11 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
-import 'package:trading_courses/home_screen/models/course_model.dart';
-import 'package:trading_courses/home_screen/models/instructor_model.dart';
 import 'package:trading_courses/home_screen/providers/courses.dart';
 import 'package:trading_courses/home_screen/providers/instructor_provider.dart';
 import 'package:trading_courses/home_screen/widgets/TitleText.dart';
@@ -15,7 +9,7 @@ import '../widgets/instructor_course_list.dart';
 
 class InstructorScreen extends StatelessWidget {
   final int id;
-  InstructorScreen({super.key, required this.id});
+  const InstructorScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +20,6 @@ class InstructorScreen extends StatelessWidget {
 
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
-    final dH = dS.height;
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -51,7 +44,7 @@ class InstructorScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                Container(
+                SizedBox(
                     height: dW * 0.2,
                     width: dW * 0.2,
                     child: Image.asset('assets/images/course_1.png')),
@@ -85,7 +78,7 @@ class InstructorScreen extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Montserrat',
-                            color: Color(0xff434343)),
+                            color: const Color(0xff434343)),
                       ),
                       Text(
                         'Courses',
@@ -93,7 +86,7 @@ class InstructorScreen extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Montserrat',
-                            color: Color(0xff434343)),
+                            color: const Color(0xff434343)),
                       ),
                     ],
                   ),
@@ -103,15 +96,15 @@ class InstructorScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TitleText(title: 'About Me'),
+                const TitleText(title: 'About Me'),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                       style: Theme.of(context).textTheme.headline1!.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Montserrat',
-                          color: Color(0xff434343)),
+                          color: const Color(0xff434343)),
                       'I have come from a humble Maharashtrian background. I have a never say ‘NO’ attitude to my life right from my childhood. With my dedication and focus, I was able to achieve 17th rank in Maharashtra Technical Board of Diploma in Mechanical Engineering from VJTI, Mumbai. After Engineering I had to do job since I couldn’t afford exorbitant fees of MBA.Finally, in my mid career, I completed by post graduation in Finance Management.'),
                 )
               ],
@@ -120,7 +113,7 @@ class InstructorScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                   height: dW * 0.15,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(12))),
                   child: Padding(
@@ -128,7 +121,7 @@ class InstructorScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('Connect with me at '),
+                        const Text('Connect with me at '),
                         Row(
                           children: [
                             IconButton(
@@ -158,12 +151,12 @@ class InstructorScreen extends StatelessWidget {
                     ),
                   )),
             ),
-            TitleText(title: 'Courses'),
-            Container(
+            const TitleText(title: 'Courses'),
+            SizedBox(
               height: (dW * 0.25 * instructor.coursesOffered.length),
               width: dW * 0.35 * instructor.coursesOffered.length,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: instructor.coursesOffered.length,
                 itemBuilder: (context, index) {
                   return authorCourseList(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:trading_courses/home_screen/models/course_model.dart';
-import 'package:trading_courses/home_screen/providers/courses.dart';
 
 class Instructor extends ChangeNotifier {
   String name;
