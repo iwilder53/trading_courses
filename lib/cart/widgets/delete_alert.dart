@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../home_screen/models/course_model.dart';
-import '../../navigation/navigators.dart';
 import '../Provider/cart_provider.dart';
 
 showAlertDialog(BuildContext context, Course courseTochange) {
@@ -13,7 +12,7 @@ showAlertDialog(BuildContext context, Course courseTochange) {
       style: Theme.of(context).textTheme.button!.copyWith(
           fontFamily: 'Montserrat',
           fontSize: 12,
-          color: Color(0xff737373),
+          color: const Color(0xff737373),
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.clip),
     ),
@@ -24,7 +23,7 @@ showAlertDialog(BuildContext context, Course courseTochange) {
   Widget continueButton = ElevatedButton(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(
-        Color(0xff3199D8),
+        const Color(0xff3199D8),
       ),
     ),
     child: Text(
@@ -44,7 +43,7 @@ showAlertDialog(BuildContext context, Course courseTochange) {
   );
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12.0))),
     title: Text(
       "Remove Item",
@@ -55,7 +54,7 @@ showAlertDialog(BuildContext context, Course courseTochange) {
           fontWeight: FontWeight.w700,
           overflow: TextOverflow.clip),
     ),
-    content: Text("Are you sure you want to remove this item  ?"),
+    content: const Text("Are you sure you want to remove this item  ?"),
     actions: [
       cancelButton,
       continueButton,

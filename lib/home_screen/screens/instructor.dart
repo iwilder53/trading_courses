@@ -132,7 +132,7 @@ class InstructorScreen extends StatelessWidget {
                                 )),
                             IconButton(
                               onPressed: () {
-                                print(coursesOffered);
+                              //  print(coursesOffered);
                               },
                               icon: Image.asset(
                                 'assets/images/Vector.png',

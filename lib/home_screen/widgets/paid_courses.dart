@@ -39,8 +39,7 @@ class PaidCourses extends StatelessWidget {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () {
-                    print(
-                        paidCourses[i].enrolled.toString() + paidCourses[i].id);
+                    //  print(paidCourses[i].enrolled.toString() + paidCourses[i].id);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => paidCourses[i].enrolled
                             ? CourseEnrolledScreen(

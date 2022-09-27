@@ -11,7 +11,7 @@ class CartProvider extends ChangeNotifier {
 
   void addCourse(Course course) {
     if (course.price != 'FREE') {
-      itemsTotal = itemsTotal + double.parse(course.price);
+      itemsTotal += double.parse(course.price);
     }
     _cartCourses.add(course);
     changeCartValues(itemsTotal);
@@ -22,13 +22,14 @@ class CartProvider extends ChangeNotifier {
   void removeCourse(Course course) {
     final itemToRemove =
         _cartCourses.indexWhere((element) => element.id == course.id);
-    if (course.price != 'FREE')
-      itemsTotal = itemsTotal - double.parse(course.price);
+    if (course.price != 'FREE') {
+      itemsTotal -= double.parse(course.price);
+    }
 
     _cartCourses.removeAt(itemToRemove);
     changeCartValues(itemsTotal);
 
-    print(_cartCourses);
+  //  print(_cartCourses);
     notifyListeners();
   }
 

@@ -377,7 +377,7 @@ class Courses extends ChangeNotifier {
     final courseToExpand = _freeCourses.firstWhere((crs) => crs.id == id);
     courseToExpand.curriculum[index].isExpanded =
         !courseToExpand.curriculum[index].isExpanded;
-    print(id.toString());
+  //  print(id.toString());
     notifyListeners();
   }
 

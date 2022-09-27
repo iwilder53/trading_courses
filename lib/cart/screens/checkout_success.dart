@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CheckoutSuccessfulScreen extends StatelessWidget {
@@ -50,7 +48,7 @@ class CheckoutSuccessfulScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5!.copyWith(
                               fontFamily: 'Montserrat',
                               fontSize: 12,
-                              color: Color(0xff737373),
+                              color: const Color(0xff737373),
                               fontWeight: FontWeight.w600,
                               overflow: TextOverflow.clip,
                             ),

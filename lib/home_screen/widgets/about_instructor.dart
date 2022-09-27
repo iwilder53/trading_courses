@@ -74,7 +74,7 @@ class AboutInstructor extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => InstructorScreen(id: 1,)));
+                      builder: (context) => const InstructorScreen(id: 1,)));
                 },
                 icon: Image.asset('assets/images/Chevron.png'))
           ],

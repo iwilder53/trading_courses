@@ -61,7 +61,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       return courseDetails.tags.map((tag) => get_chip(tag)).toList();
     }
 
-    List<Map<String, dynamic>> _items = List.generate(
+    List<Map<String, dynamic>> items = List.generate(
         courseDetails.curriculum.length,
         // courseDetails.curriculum.length,
         (index) => {
@@ -75,7 +75,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     void printCurriculum(int index, bool isExpanded) {
       courseData.expand(courseDetails.id, index);
 
-      print(courseDetails.curriculum[1].videos.toString());
+    //  print(courseDetails.curriculum[1].videos.toString());
     }
 
     return Container(
@@ -293,7 +293,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                         printCurriculum(index, isExpanded);
                       },
                       animationDuration: const Duration(milliseconds: 600),
-                      children: _items
+                      children: items
                           .map(
                             (item) => ExpansionPanel(
                               backgroundColor: Colors.transparent,
@@ -500,7 +500,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               onPressed: () {
-                print("Button is pressed.");
+              //  print("Button is pressed.");
                 //task to execute when this button is pressed
               },
               child: Padding(

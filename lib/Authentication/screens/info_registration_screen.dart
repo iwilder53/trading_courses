@@ -258,14 +258,19 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
             margin: EdgeInsets.only(top: dW * 0.08),
             child: ElevatedButton(
               onPressed: () {
-                Provider.of<User>(context, listen: false).register(
-                    mailInput.text.toString(),
-                    nameInput.text.toString(),
-                    dateInput.text.toString(),
-                    RadioGroupWidget().genders[RadioGroupWidget().id]);
+              //  print(nameInput.text + mailInput.text);
+                if (nameInput.text != '' ||
+                    mailInput.text != '' ||
+                    dateInput.text != '') {
+                  Provider.of<User>(context, listen: false).register(
+                      mailInput.text.toString(),
+                      nameInput.text.toString(),
+                      dateInput.text.toString(),
+                      RadioGroupWidget().genders[RadioGroupWidget().id]);
 
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Dashboard()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const Dashboard()));
+                }
               },
               child: const Text(
                 "Continue",

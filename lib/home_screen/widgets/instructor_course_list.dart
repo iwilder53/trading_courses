@@ -53,17 +53,14 @@ class AuthorCourseList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    // padding: const EdgeInsets.all(0.0),
-                    child: Text(
-                      coursesOffered[index].courseName,
-                      style: Theme.of(context).textTheme.headline1!.copyWith(
-                          overflow: TextOverflow.fade,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Montserrat',
-                          color: Colors.black),
-                    ),
+                  Text(
+                    coursesOffered[index].courseName,
+                    style: Theme.of(context).textTheme.headline1!.copyWith(
+                        overflow: TextOverflow.fade,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Montserrat',
+                        color: Colors.black),
                   ),
                   Row(
                     children: [

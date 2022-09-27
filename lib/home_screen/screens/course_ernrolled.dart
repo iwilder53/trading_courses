@@ -54,11 +54,12 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
           ));
     }
 
+    // ignore: unused_element
     generate_tags() {
       return courseDetails.tags.map((tag) => get_chip(tag)).toList();
     }
 
-    List<Map<String, dynamic>> _items = List.generate(
+    List<Map<String, dynamic>> items = List.generate(
         courseDetails.curriculum.length,
         // courseDetails.curriculum.length,
         (index) => {
@@ -69,12 +70,6 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
             },
         growable: false);
 
-    //  List _courseModules
-    void printCurriculum(int index, bool isExpanded) {
-      courseData.expand(courseDetails.id, index);
-
-      print(courseDetails.curriculum[index].videos.toString());
-    }
 
     return Container(
         decoration: const BoxDecoration(
@@ -210,9 +205,9 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                     height: dW * 0.8,
                     width: dH,
                     child: ListView.builder(
-                        itemCount: _items.length,
+                        itemCount: items.length,
                         itemBuilder: (_, index) {
-                          final item = _items[index];
+                          final item = items[index];
                           return /* Container(
                             decoration: BoxDecoration(
                                 borderRadius:

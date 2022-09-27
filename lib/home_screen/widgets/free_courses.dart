@@ -12,7 +12,6 @@ class FreeCourses extends StatelessWidget {
   Widget build(BuildContext context) {
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
-    final dH = dS.height;
     final courseData = Provider.of<Courses>(context);
     final freeCourses = courseData.freeCourses;
     return SizedBox(
