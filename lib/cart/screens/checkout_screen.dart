@@ -6,6 +6,7 @@ import 'package:trading_courses/cart/screens/checkout_success.dart';
 import 'package:trading_courses/cart/widgets/delete_alert.dart';
 import 'package:trading_courses/home_screen/models/course_model.dart';
 import 'package:trading_courses/home_screen/widgets/TitleText.dart';
+import '../../home_screen/providers/courses.dart';
 import '../../navigation/navigators.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -288,12 +289,20 @@ class CheckoutScreen extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 onPressed: () {
+                  for (int i = 0; i < coursesToShow.length; i++) {
+                    Provider.of<Courses>(context, listen: false)
+                        .enrollPaid(coursesToShow[i].id);
+
+                    print(coursesToShow[i].id);
+                  }
+                  //  Provider.of<CartProvider>(context, listen: false).checkout;
+                  courseList.checkout();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const CheckoutSuccessfulScreen()),
                   );
-                //  print("Button is pressed.");
+                  //  print("Button is pressed.");
                   //task to execute when this button is pressed
                 },
                 child: Padding(
@@ -465,7 +474,7 @@ class CourseWidget extends StatelessWidget {
               onPressed: () {
                 showAlertDialog(context, coursesToShow[index]);
 
-  //              print('object');
+                //              print('object');
               },
               label: Text(
                 'Remove',

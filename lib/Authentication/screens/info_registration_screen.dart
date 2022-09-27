@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/navigation/navigators.dart';
 import 'package:intl/intl.dart';
+import 'package:trading_courses/navigation/routes.dart';
 
 import '../../../Authentication/models/user.dart';
 import '../../home_screen/screens/home_screen.dart';
@@ -258,7 +259,7 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
             margin: EdgeInsets.only(top: dW * 0.08),
             child: ElevatedButton(
               onPressed: () {
-              //  print(nameInput.text + mailInput.text);
+                //  print(nameInput.text + mailInput.text);
                 if (nameInput.text != '' ||
                     mailInput.text != '' ||
                     dateInput.text != '') {
@@ -267,9 +268,10 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
                       nameInput.text.toString(),
                       dateInput.text.toString(),
                       RadioGroupWidget().genders[RadioGroupWidget().id]);
-
+/* 
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const Dashboard()));
+                      builder: (context) => const Dashboard())); */
+                  push(context, NamedRoute.dashboardScreen);
                 }
               },
               child: const Text(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:trading_courses/navigation/navigators.dart';
+import 'package:trading_courses/navigation/routes.dart';
 
 class CheckoutSuccessfulScreen extends StatelessWidget {
   const CheckoutSuccessfulScreen({super.key});
@@ -74,11 +76,7 @@ class CheckoutSuccessfulScreen extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CheckoutSuccessfulScreen()),
-                  );
+                  push(context, NamedRoute.dashboardScreen);
                   //task to execute when this button is pressed
                 },
                 child: Padding(

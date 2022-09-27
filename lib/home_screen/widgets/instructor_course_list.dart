@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:trading_courses/home_screen/screens/course_details.dart';
+import 'package:trading_courses/navigation/arguments.dart';
 
 import '../models/course_model.dart';
 import '../screens/course_ernrolled.dart';
@@ -25,10 +26,10 @@ class AuthorCourseList extends StatelessWidget {
                 ? CourseEnrolledScreen(
                     id: int.parse(coursesOffered[index].id) - 1,
                   )
-                : CourseDetailScreen(
+                : CourseDetailScreen(args: CourseDetailScreenArguments(
                     id: int.parse(coursesOffered[index].id) - 1,
                     free:
-                        coursesOffered[index].price == 'FREE' ? true : false)));
+                        coursesOffered[index].price == 'FREE' ? true : false),)));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8.0),

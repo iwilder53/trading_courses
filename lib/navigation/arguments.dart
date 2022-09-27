@@ -13,10 +13,5 @@ class OtpScreenArguments {
 class CourseDetailScreenArguments {
   final int id;
   final bool free;
-  CourseDetailScreenArguments({required this.id,required this.free});
-}
-
-class CourseEnrolledScreenArguments {
-  final int id;
-  CourseEnrolledScreenArguments({required this.id});
+  CourseDetailScreenArguments({required this.id, required this.free});
 }

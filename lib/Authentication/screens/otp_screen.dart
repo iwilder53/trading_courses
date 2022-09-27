@@ -35,7 +35,7 @@ class OtpScreen extends StatelessWidget {
               height: dH * 0.12,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(dW * 0.05),
               child: Column(
                 children: [
                   Container(
@@ -73,7 +73,8 @@ class OtpScreen extends StatelessWidget {
               child: Form(
                 key: _formKey,
                 child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: dW * 0.05, vertical: dW * 0.05),
                     child: PinCodeTextField(
                       appContext: context,
 

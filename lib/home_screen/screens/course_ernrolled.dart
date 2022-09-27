@@ -10,6 +10,7 @@ import '../providers/courses.dart';
 import '../widgets/TitleText.dart';
 import '../widgets/about_instructor.dart';
 import '../widgets/bullet_points.dart';
+import '../widgets/my_app_bar.dart';
 
 class CourseEnrolledScreen extends StatefulWidget {
   final int id;
@@ -23,7 +24,6 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   // ignore: prefer_final_fields
@@ -35,8 +35,6 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
     final dH = dS.height;
     final courseData = Provider.of<Courses>(context);
     final courseDetails = courseData.freeCourses[widget.id];
-
-
 
     get_chip(name) {
       return Chip(
@@ -70,7 +68,6 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
             },
         growable: false);
 
-
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -79,12 +76,16 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                 colors: [Color(0xffFBFFF4), Color(0xff98CCEC)])),
         child: Scaffold(
           //   appBar:AppBar(),
+          appBar: MyAppBar(
+            dW: dW,
+          ),
+          extendBodyBehindAppBar: true,
           backgroundColor: Colors.transparent,
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: ListView(
               children: [
-                Row(
+                /*  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
@@ -96,7 +97,7 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                         onPressed: (() {}),
                         icon: Image.asset('assets/images/share.png')),
                   ],
-                ),
+                ), */
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: [

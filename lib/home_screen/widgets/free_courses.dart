@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/home_screen/screens/course_details.dart';
 import 'package:trading_courses/home_screen/screens/course_ernrolled.dart';
+import 'package:trading_courses/navigation/navigators.dart';
+import '../../navigation/arguments.dart';
 import '../providers/courses.dart';
 
 class FreeCourses extends StatelessWidget {
@@ -41,15 +43,14 @@ class FreeCourses extends StatelessWidget {
                     print(
                         freeCourses[i].enrolled.toString() + freeCourses[i].id); */
                 
-                
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => freeCourses[i].enrolled
                             ? CourseEnrolledScreen(
                                 id: int.parse(freeCourses[i].id) - 1,
                               )
-                            : CourseDetailScreen(
+                            : CourseDetailScreen( args: CourseDetailScreenArguments(
                                 id: int.parse(freeCourses[i].id) - 1,
-                                free: true,
+                                free: true,)
                                
                               )));
                   },

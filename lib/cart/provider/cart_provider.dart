@@ -10,11 +10,15 @@ class CartProvider extends ChangeNotifier {
   double toPay = 0.00;
 
   void addCourse(Course course) {
-    if (course.price != 'FREE') {
+    if (course.price != 'FREE' ) {
       itemsTotal += double.parse(course.price);
-    }
+    } /* 
+    _cartCourses.contains(course)?
+    _cartCourses.add(course):null; */
+    
     _cartCourses.add(course);
-    changeCartValues(itemsTotal);
+
+    changeCartValues();
 
     notifyListeners();
   }
@@ -27,16 +31,22 @@ class CartProvider extends ChangeNotifier {
     }
 
     _cartCourses.removeAt(itemToRemove);
-    changeCartValues(itemsTotal);
+    changeCartValues();
 
-  //  print(_cartCourses);
+    //  print(_cartCourses);
     notifyListeners();
   }
 
-  void changeCartValues(double price) {
+  void changeCartValues() {
     totalGst = (itemsTotal / 100) * 18;
     toPay = totalGst + itemsTotal;
     notifyListeners();
+  }
+
+  void checkout() {
+    _cartCourses.clear();
+    itemsTotal = 0;
+    changeCartValues();
   }
 
   get cartCourses {

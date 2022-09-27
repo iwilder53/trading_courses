@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:trading_courses/navigation/arguments.dart';
 
 import '../providers/courses.dart';
 import '../screens/course_details.dart';
@@ -46,8 +47,10 @@ class PaidCourses extends StatelessWidget {
                                 id: int.parse(paidCourses[i].id) - 1,
                               )
                             : CourseDetailScreen(
-                                id: int.parse(paidCourses[i].id) - 1,
-                                free: false,
+                                args: CourseDetailScreenArguments(
+                                  id: int.parse(paidCourses[i].id) - 1,
+                                  free: false,
+                                ),
                               )));
                   },
                   child: Column(

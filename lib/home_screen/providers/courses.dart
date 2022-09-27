@@ -377,7 +377,7 @@ class Courses extends ChangeNotifier {
     final courseToExpand = _freeCourses.firstWhere((crs) => crs.id == id);
     courseToExpand.curriculum[index].isExpanded =
         !courseToExpand.curriculum[index].isExpanded;
-  //  print(id.toString());
+    //  print(id.toString());
     notifyListeners();
   }
 
@@ -397,8 +397,8 @@ class Courses extends ChangeNotifier {
   }
 
   void enrollPaid(String id) {
-    final enrolmentToChange = _paidCourses.firstWhere((crs) => crs.id == id);
-    enrolmentToChange.enrolled = !enrolmentToChange.enrolled;
+    final course = _paidCourses.firstWhere((crs) => crs.id == id);
+    course.enrolled ? null : course.enrolled = !course.enrolled;
     notifyListeners();
   }
 }

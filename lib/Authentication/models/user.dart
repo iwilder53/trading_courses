@@ -5,13 +5,17 @@ class User extends ChangeNotifier {
   String name = "";
   String dob = "";
   String gender = "";
+  List enrolledCourses = [];
 
   void register(
-      String emailTxt, String nameTxt, String dobTxt, String genderTxt) {
+    String emailTxt, String nameTxt, String dobTxt, String genderTxt) {
     email = emailTxt;
     name = nameTxt;
     dob = dobTxt;
     gender = genderTxt;
+
     notifyListeners();
   }
+
+  
 }

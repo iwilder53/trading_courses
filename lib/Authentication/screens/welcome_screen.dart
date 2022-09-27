@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:trading_courses/navigation/navigators.dart';
+import 'package:trading_courses/navigation/routes.dart';
 
 import '../widgets/onboarding_carousel.dart';
-import 'mobile_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -36,8 +37,9 @@ class WelcomeScreen extends StatelessWidget {
               height: dW * 0.12,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MobileScreen()));
+                  /*     Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MobileScreen())); */
+                  push(context, NamedRoute.mobileScreen);
                 },
                 child: const Text("Start Learning"),
               ),

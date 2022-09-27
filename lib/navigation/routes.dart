@@ -3,6 +3,8 @@ class NamedRoute {
   static const String otpScreen = '/OtpScreen';
   static const String photoScreen = '/PhotoScreen';
   static const String infoRegistrationScreen = '/infoRegistrationScreen';
+  static const String dashboardScreen = '/DashboardScreen';
+
   static const String courseDetailScreen = '/CourseDetailScreen';
   static const String courseEnrolledScreen = '/CourseEnrolledScreen';
   static const String instructorScreen = '/InstructorScreen';

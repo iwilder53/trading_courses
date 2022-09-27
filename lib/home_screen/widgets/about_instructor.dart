@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trading_courses/navigation/navigators.dart';
+import 'package:trading_courses/navigation/routes.dart';
 
 import '../models/course_model.dart';
 import '../screens/instructor.dart';
@@ -12,7 +14,6 @@ class AboutInstructor extends StatelessWidget {
 
   final double dW;
   final Course courseDetails;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +74,10 @@ class AboutInstructor extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
+                  /* 
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const InstructorScreen(id: 1,)));
+                      builder: (context) => const InstructorScreen(id: 1,))); */
+                  push(context, NamedRoute.instructorScreen, arguments: 1);
                 },
                 icon: Image.asset('assets/images/Chevron.png'))
           ],

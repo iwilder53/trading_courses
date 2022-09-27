@@ -5,78 +5,83 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_courses/cart/Provider/cart_provider.dart';
-import 'package:trading_courses/cart/screens/checkout_screen.dart';
-import 'package:trading_courses/home_screen/screens/course_ernrolled.dart';
+import 'package:trading_courses/home_screen/widgets/my_app_bar.dart';
+import 'package:trading_courses/navigation/arguments.dart';
 import 'package:trading_courses/navigation/navigators.dart';
+import 'package:trading_courses/navigation/routes.dart';
+import '../models/course_model.dart';
 import '../providers/courses.dart';
 import '../widgets/TitleText.dart';
 import '../widgets/about_instructor.dart';
 import '../widgets/bullet_points.dart';
 
 class CourseDetailScreen extends StatefulWidget {
-  final int id;
-  final bool free;
-  const CourseDetailScreen({super.key, required this.id, required this.free});
+  final CourseDetailScreenArguments args;
+  const CourseDetailScreen({super.key, required this.args});
 
   @override
   State<CourseDetailScreen> createState() => _CourseDetailScreenState();
 }
 
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
+  late Courses courseData;
+  late Course courseDetails;
+
   @override
   void initState() {
     super.initState();
+    // courseData = Provider.of<Courses>(context, listen:false);
   }
 
   // ignore: prefer_final_fields
+
+  get_chip(name) {
+    return Chip(
+        padding: const EdgeInsets.all(-2),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5))),
+        backgroundColor: const Color(0xff3199D8),
+        label: Text(
+          "#$name",
+          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+              fontFamily: 'Montserrat',
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: Colors.white),
+        ));
+  }
+
+  generate_tags() {
+    return courseDetails.tags.map((tag) => get_chip(tag)).toList();
+  }
+
+  List<Map<String, dynamic>> items() => List.generate(
+      courseDetails.curriculum.length,
+      // courseDetails.curriculum.length,
+      (index) => {
+            'title': courseDetails.curriculum[index].name,
+            'courses': courseDetails.curriculum[index].videos,
+            'isExpanded': courseDetails.curriculum[index].isExpanded
+          },
+      growable: false);
+
+  //  List _courseModules
+  void printCurriculum(int index, bool isExpanded) {
+    courseData.expand(courseDetails.id, index);
+
+    //  print(courseDetails.curriculum[1].videos.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
     final dH = dS.height;
-    final courseData = Provider.of<Courses>(context);
+    courseData = Provider.of<Courses>(context);
 
-    final courseDetails = widget.free
-        ? courseData.freeCourses[widget.id]
-        : courseData.paidCourses[widget.id];
-
-    get_chip(name) {
-      return Chip(
-          padding: const EdgeInsets.all(-2),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5))),
-          backgroundColor: const Color(0xff3199D8),
-          label: Text(
-            "#$name",
-            style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                fontFamily: 'Montserrat',
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
-                color: Colors.white),
-          ));
-    }
-
-    generate_tags() {
-      return courseDetails.tags.map((tag) => get_chip(tag)).toList();
-    }
-
-    List<Map<String, dynamic>> items = List.generate(
-        courseDetails.curriculum.length,
-        // courseDetails.curriculum.length,
-        (index) => {
-              'title': courseDetails.curriculum[index].name,
-              'courses': courseDetails.curriculum[index].videos,
-              'isExpanded': courseDetails.curriculum[index].isExpanded
-            },
-        growable: false);
-
-    //  List _courseModules
-    void printCurriculum(int index, bool isExpanded) {
-      courseData.expand(courseDetails.id, index);
-
-    //  print(courseDetails.curriculum[1].videos.toString());
-    }
+    courseDetails = widget.args.free
+        ? courseData.freeCourses[widget.args.id]
+        : courseData.paidCourses[widget.args.id];
 
     return Container(
         decoration: const BoxDecoration(
@@ -85,13 +90,14 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                 end: Alignment.bottomRight,
                 colors: [Color(0xffFBFFF4), Color(0xff98CCEC)])),
         child: Scaffold(
-          //   appBar:AppBar(),
+          appBar: MyAppBar(dW: dW),
+          extendBodyBehindAppBar: true,
           backgroundColor: Colors.transparent,
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: ListView(
               children: [
-                Row(
+                /* Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
@@ -103,7 +109,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                         onPressed: (() {}),
                         icon: SvgPicture.asset('assets/svg/bookmark.svg')),
                   ],
-                ),
+                ), */
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -174,11 +180,16 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                             print(courseDetails.enrolled.toString() +
                                 courseDetails.id);
                           }
-
-                          if (widget.free) {
-                            Navigator.of(context).push(MaterialPageRoute(
+/* 
+                          if (widget.args.free) {
+                            push(
+                              context,
+                              NamedRoute.courseEnrolledScreen,
+                              arguments: int.parse(courseDetails.id),
+                            );
+                            /*   Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => CourseEnrolledScreen(
-                                    id: int.parse(courseDetails.id))));
+                                    id: int.parse(courseDetails.id)))); */
                             !courseDetails.enrolled
                                 ? Provider.of<Courses>(context, listen: false)
                                     .enrollFree(courseDetails.id)
@@ -186,9 +197,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                           } else {
                             Provider.of<CartProvider>(context, listen: false)
                                 .addCourse(courseDetails);
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const CheckoutScreen()));
-                          }
+                            /*    Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const CheckoutScreen())); */
+                            push(context, NamedRoute.checkoutScreen);
+                          } */
                         },
                         style: OutlinedButton.styleFrom(
                           side:
@@ -293,7 +305,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                         printCurriculum(index, isExpanded);
                       },
                       animationDuration: const Duration(milliseconds: 600),
-                      children: items
+                      children: items()
                           .map(
                             (item) => ExpansionPanel(
                               backgroundColor: Colors.transparent,
@@ -485,7 +497,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               ],
             ),
           ),
-
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Container(
@@ -500,8 +511,29 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               onPressed: () {
-              //  print("Button is pressed.");
-                //task to execute when this button is pressed
+                //  print("Button is pressed.");
+                if (widget.args.free) {
+                  pushReplacement(
+                    context,
+                    NamedRoute.courseEnrolledScreen,
+                    arguments: int.parse(courseDetails.id),
+                  );
+                  /*   Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => CourseEnrolledScreen(
+                                    id: int.parse(courseDetails.id)))); */
+
+                  !courseDetails.enrolled
+                      ? Provider.of<Courses>(context, listen: false)
+                          .enrollFree(courseDetails.id)
+                      : null;
+                } else {
+                  Provider.of<CartProvider>(context, listen: false)
+                      .addCourse(courseDetails);
+
+                  /*    Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const CheckoutScreen())); */
+                  pushReplacement(context, NamedRoute.checkoutScreen);
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
