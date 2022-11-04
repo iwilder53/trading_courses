@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trading_courses/Authentication/providers/auth_provider.dart';
 import 'package:trading_courses/Authentication/screens/welcome_screen.dart';
 import 'package:trading_courses/cart/Provider/cart_provider.dart';
 import 'package:trading_courses/home_screen/providers/quiz_provider.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
-        ChangeNotifierProvider(create: (_) => User()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => Courses()),
         ChangeNotifierProvider(create: (_) => QuizProvider()),
       ],

@@ -1,6 +1,8 @@
 // ignore_for_file: unused_local_variable, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trading_courses/Authentication/providers/auth_provider.dart';
 
 class RadioGroup extends StatefulWidget {
   const RadioGroup({super.key});
@@ -15,9 +17,21 @@ class RadioGroupWidget extends State {
   List<String> genders = ['male', 'female', 'other'];
   // Group Value for Radio Button.
   int id = 1;
+
+  // Group Value for Radio Button.
+  int _id = 1;
+  void genderSelected(int? val) {
+    setState(() {
+      _id = val!;
+      Provider.of<AuthProvider>(context, listen: false).user.gender =
+          genders[_id - 1];
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    Provider.of<AuthProvider>(context, listen: false).user.gender = 'male';
   }
 
   @override
@@ -26,25 +40,16 @@ class RadioGroupWidget extends State {
     final dW = dS.width;
     final dH = dS.height;
 
-    // Default Radio Button Selected Item When App Starts.
-
-    // Group Value for Radio Button.
-    int _id = 1;
-    void genderSelected(int? id) {
-      setState(() {
-        // _id = id!;
-      });
-    }
-
     return Row(
       // crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Radio(
           value: 1,
-          groupValue: id,
+          groupValue: _id,
           onChanged: (val) {
             genderSelected(val);
+            print('val$val');
             id = 1;
           },
         ),
@@ -55,11 +60,12 @@ class RadioGroupWidget extends State {
         Radio(
           value: 2,
           toggleable: true,
-          groupValue: id,
+          groupValue: _id,
           onChanged: (val) {
-            setState(() {
-              id = 2;
-            });
+            genderSelected(val);
+            print('val$val');
+
+            id = 2;
           },
         ),
         const Text(
@@ -70,11 +76,11 @@ class RadioGroupWidget extends State {
         ),
         Radio(
           value: 3,
-          groupValue: id,
+          groupValue: _id,
           onChanged: (val) {
-            setState(() {
-              id = 3;
-            });
+            id = 3;
+            genderSelected(val);
+            print('val$val');
           },
         ),
         const Text(

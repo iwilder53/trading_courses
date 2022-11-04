@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:trading_courses/home_screen/models/module_model.dart';
 import 'package:trading_courses/home_screen/models/review_model.dart';
 
+import '../../api.dart';
+import '../../helpers/http_helper.dart';
 import '../models/course_model.dart';
 
 class Courses extends ChangeNotifier {
@@ -172,7 +174,7 @@ class Courses extends ChangeNotifier {
           ReviewModel(
               id: '1',
               name: 'Joyesh Choaudhary',
-              stars: 4,
+              stars: 4.0,
               description:
                   'This is a great course that beginner can follow along easily. Instructor is also giving tips and tricks for us to remember things easily.Definitely recommend to go for it.'),
           ReviewModel(
@@ -360,7 +362,26 @@ class Courses extends ChangeNotifier {
   ];
 
   List<Course> get freeCourses {
+    
     return [..._freeCourses];
+
+  }
+
+  Future<List<Course>> getCourses(String token) async {
+    final url = '${webApi['domain']}${endPoint['getFreeCourses']}';
+
+    try {
+      final response = await RemoteServices.httpRequest(
+          method: 'POST', url: url, accessToken: token);
+      // print('response${response}');
+      final List<Course> result =
+          List.from(response['result']).map((e) => Course.fromJson(e)).toList();
+          
+      return [...result];
+    } catch (err) {
+      print(err);
+      return [...freeCourses];
+    }
   }
 
   List<Course> get paidCourses {

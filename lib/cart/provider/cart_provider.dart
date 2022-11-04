@@ -10,15 +10,16 @@ class CartProvider extends ChangeNotifier {
   double toPay = 0.00;
 
   void addCourse(Course course) {
-    if (course.price != 'FREE' ) {
-      itemsTotal += double.parse(course.price);
-    } /* 
+    /* 
     _cartCourses.contains(course)?
     _cartCourses.add(course):null; */
-    
-    _cartCourses.add(course);
-
-    changeCartValues();
+    if (!_cartCourses.contains(course)) {
+      if (course.price != 'FREE') {
+        itemsTotal += double.parse(course.price);
+      }
+      _cartCourses.add(course);
+      changeCartValues();
+    }
 
     notifyListeners();
   }

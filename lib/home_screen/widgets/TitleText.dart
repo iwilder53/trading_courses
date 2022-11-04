@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class TitleText extends StatelessWidget {
   final title;
-
-  const TitleText({Key? key, required this.title})
+  final dW;
+  const TitleText({Key? key, required this.title, required this.dW})
       : super(
           key: key,
         );
@@ -13,7 +13,7 @@ class TitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(dW * 0.02),
       child: Text(
         title,
         style: const TextStyle(

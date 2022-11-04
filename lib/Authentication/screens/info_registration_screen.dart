@@ -1,15 +1,17 @@
+import 'dart:io';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:trading_courses/Authentication/providers/auth_provider.dart';
 import 'package:trading_courses/navigation/navigators.dart';
 import 'package:intl/intl.dart';
-import 'package:trading_courses/navigation/routes.dart';
-
-import '../../../Authentication/models/user.dart';
-import '../../home_screen/screens/home_screen.dart';
+import '../../helpers/circular_loader.dart';
+import '../../navigation/routes.dart';
+import '../models/user.dart';
 import '../widgets/gender_radio_buttons.dart';
 
 class PersonalInformationScreen extends StatefulWidget {
@@ -26,10 +28,38 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
   final TextEditingController nameInput = TextEditingController();
   final TextEditingController mailInput = TextEditingController();
   final _mailFormKey = GlobalKey<FormState>();
+  bool isLoading = false;
+
+  late AuthProvider authenticationProvider;
+  late User user;
+  void register() async {
+    print(user.gender);
+    Map<String, dynamic> userDetails = {
+      "fullName": nameInput.text.trim(),
+      "email": mailInput.text.trim(),
+      // "dob": dateInput.toString(),
+      "gender": user.gender,
+      "mobileNumber": authenticationProvider.user.phone
+    };
+    loading();
+    final response = await authenticationProvider.register(userDetails);
+
+    if (response['message'] == "User created successfully") {
+      push(context, NamedRoute.dashboardScreen);
+    }
+    loading();
+  }
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void loading() {
+    setState(() {
+      isLoading = !isLoading;
+    });
   }
 
   void setDate() {
@@ -45,18 +75,8 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
     final dH = dS.height;
-
-    // ignore: unused_local_variable, no_leading_underscores_for_local_identifiers
-    int _id = 2;
-    // ignore: unused_element
-    void genderSelected(int? id) {
-      if (kDebugMode) {
-        print('clicked');
-      }
-      setState(() {
-        _id = id!;
-      });
-    }
+    authenticationProvider = Provider.of<AuthProvider>(context, listen: false);
+    user = authenticationProvider.user;
 
     return Scaffold(
         body: ListView(padding: const EdgeInsets.all(18), children: [
@@ -258,26 +278,14 @@ class _PersonalInformationScreen extends State<PersonalInformationScreen> {
             height: dW * 0.12,
             margin: EdgeInsets.only(top: dW * 0.08),
             child: ElevatedButton(
-              onPressed: () {
-                //  print(nameInput.text + mailInput.text);
-                if (nameInput.text != '' ||
-                    mailInput.text != '' ||
-                    dateInput.text != '') {
-                  Provider.of<User>(context, listen: false).register(
-                      mailInput.text.toString(),
-                      nameInput.text.toString(),
-                      dateInput.text.toString(),
-                      RadioGroupWidget().genders[RadioGroupWidget().id]);
-/* 
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const Dashboard())); */
-                  push(context, NamedRoute.dashboardScreen);
-                }
-              },
-              child: const Text(
-                "Continue",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              ),
+              onPressed: isLoading ? null : register,
+              child: isLoading
+                  ? const CircularLoader()
+                  : const Text(
+                      "Continue",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    ),
             )),
       ),
     ]));

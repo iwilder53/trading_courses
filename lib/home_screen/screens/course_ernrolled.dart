@@ -198,7 +198,7 @@ class _CourseEnrolledScreen extends State<CourseEnrolledScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: AboutInstructor(dW: dW, courseDetails: courseDetails),
                 ),
-                const TitleText(title: 'MODULES'),
+                 TitleText(title: 'MODULES',dW: dW,),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(

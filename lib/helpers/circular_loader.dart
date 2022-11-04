@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
 class CircularLoader extends StatelessWidget {
-  final double android;
-  final double iOS;
-  const CircularLoader({super.key, required this.android, required this.iOS});
+  const CircularLoader({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
-        ? CupertinoActivityIndicator(radius: iOS)
+        ? const CupertinoActivityIndicator()
         : SizedBox(
-            height: android,
-            width: android,
             child: CircularProgressIndicator(
               strokeWidth: 3,
               valueColor:

@@ -79,7 +79,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     final dH = dS.height;
     courseData = Provider.of<Courses>(context);
 
-    courseDetails = widget.args.free
+    courseDetails =  widget.args.free
         ? courseData.freeCourses[widget.args.id]
         : courseData.paidCourses[widget.args.id];
 
@@ -229,7 +229,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const TitleText(title: 'Course Highlights'),
+                      TitleText(dW: dW, title: 'Course Highlights'),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Container(
@@ -276,9 +276,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                   padding: EdgeInsets.only(top: dH * 0.04),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      TitleText(title: 'About Course'),
-                      Padding(
+                    children: [
+                      TitleText(dW: dW, title: 'About Course'),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                             style: TextStyle(
@@ -292,7 +292,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     ],
                   ),
                 ),
-                const TitleText(title: 'Curriculum'),
+                TitleText(dW: dW, title: 'Curriculum'),
                 Container(
                   color: Colors.transparent,
                   //  height: dW,
@@ -384,7 +384,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     ),
                   ),
                 ),
-                const TitleText(title: 'Requirments'),
+                TitleText(dW: dW, title: 'Requirments'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -425,11 +425,11 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     ],
                   ),
                 ),
-                const TitleText(title: 'About Instructor'),
+                TitleText(dW: dW, title: 'About Instructor'),
                 AboutInstructor(dW: dW, courseDetails: courseDetails),
-                const Padding(
-                  padding: EdgeInsets.only(top: 16.0),
-                  child: TitleText(title: 'Tags'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: TitleText(dW: dW, title: 'Tags'),
                 ),
                 Container(
                   height: dW * 0.2,
@@ -441,7 +441,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     children: <Widget>[...generate_tags()],
                   ),
                 ),
-                const TitleText(title: 'Reviews'),
+                TitleText(dW: dW, title: 'Reviews'),
                 Container(
                   padding: const EdgeInsets.all(8),
                   height: dW,

@@ -96,7 +96,7 @@ class InstructorScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const TitleText(title: 'About Me'),
+                 TitleText(title: 'About Me',dW: dW,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -151,7 +151,7 @@ class InstructorScreen extends StatelessWidget {
                     ),
                   )),
             ),
-            const TitleText(title: 'Courses'),
+             TitleText(title: 'Courses',dW: dW,),
             SizedBox(
               height: (dW * 0.25 * instructor.coursesOffered.length),
               width: dW * 0.35 * instructor.coursesOffered.length,

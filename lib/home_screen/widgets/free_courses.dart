@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:trading_courses/home_screen/screens/course_details.dart';
-import 'package:trading_courses/home_screen/screens/course_ernrolled.dart';
-import 'package:trading_courses/navigation/navigators.dart';
-import '../../navigation/arguments.dart';
+import 'package:trading_courses/Authentication/providers/auth_provider.dart';
+import '../models/course_model.dart';
 import '../providers/courses.dart';
 
 class FreeCourses extends StatelessWidget {
-  const FreeCourses({super.key});
+
+  final courseList ;
+  const FreeCourses({super.key, required this.courseList});
+
 
   @override
   Widget build(BuildContext context) {
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
     final courseData = Provider.of<Courses>(context);
-    final freeCourses = courseData.freeCourses;
-    return SizedBox(
+    final user = Provider.of<AuthProvider>(context).user;
+    final freeCourses =
+        courseData.freeCourses;
+
+    return Container(
         height: dW * 0.8,
         width: dW * 0.4,
         child: ListView.builder(
@@ -39,20 +43,19 @@ class FreeCourses extends StatelessWidget {
               child: InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onTap: () {/* 
-                    print(
-                        freeCourses[i].enrolled.toString() + freeCourses[i].id); */
-                
-                    Navigator.of(context).push(MaterialPageRoute(
+                  onTap: () {
+                    Courses().getCourses(user.token!);
+
+                    /*             Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => freeCourses[i].enrolled
                             ? CourseEnrolledScreen(
                                 id: int.parse(freeCourses[i].id) - 1,
                               )
-                            : CourseDetailScreen( args: CourseDetailScreenArguments(
+                            : CourseDetailScreen(
+                                args: CourseDetailScreenArguments(
                                 id: int.parse(freeCourses[i].id) - 1,
-                                free: true,)
-                               
-                              )));
+                                free: true,
+                              )))); */
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
+import 'package:trading_courses/Authentication/models/user.dart';
+import 'package:trading_courses/Authentication/providers/auth_provider.dart';
 import 'package:trading_courses/navigation/arguments.dart';
 import 'package:trading_courses/navigation/routes.dart';
 
@@ -16,6 +21,22 @@ class OtpScreen extends StatelessWidget {
   });
   final _formKey = GlobalKey<FormState>();
 
+  Future login(BuildContext context, int phone) async {
+    if (_formKey.currentState!.validate()) {
+      final response = await Provider.of<AuthProvider>(context, listen: false)
+          .login((phone));
+
+
+          
+
+      if (response['message'] == "User Already exists") {
+        push(context, NamedRoute.dashboardScreen);
+      } else {
+        push(context, NamedRoute.infoRegistrationScreen);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
@@ -23,6 +44,9 @@ class OtpScreen extends StatelessWidget {
     final dS = MediaQuery.of(context).size;
     final dW = dS.width;
     final dH = dS.height;
+    final authenticationProvider = Provider.of<AuthProvider>(context);
+    final User user = Provider.of<AuthProvider>(context).user;
+    user.phone = int.parse(args.mobNumber);
 
     return Scaffold(
       body: Padding(
@@ -104,10 +128,19 @@ class OtpScreen extends StatelessWidget {
                       // controller: textEditingController,
                       keyboardType: TextInputType.number,
 
-                      onCompleted: (v) {
-                        if (_formKey.currentState!.validate()) {
-                          push(context, NamedRoute.photoScreen);
-                        }
+                      onCompleted: (v) async {
+                        /*                      if (_formKey.currentState!.validate()) {
+                          final response = await Provider.of<AuthProvider>(
+                                  context,
+                                  listen: false)
+                              .login((user.phone!));
+
+                          if (response['message'] == "User Already exists") {
+                            push(context, NamedRoute.dashboardScreen);
+                          } else {
+                            push(context, NamedRoute.infoRegistrationScreen);
+                          }
+                        } */
                       },
                       // onTap: () {
                       //   print("Pressed");
@@ -126,13 +159,7 @@ class OtpScreen extends StatelessWidget {
               height: dH * 0.06,
               padding: const EdgeInsets.symmetric(horizontal: 22.0),
               child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    push(context, NamedRoute.photoScreen);
-                  }
-
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => MobileScreen() ) );
-                },
+                onPressed: () => login(context, user.phone!),
                 child: const Text("Continue"),
               ),
             ),

@@ -28,7 +28,9 @@ class CheckoutScreen extends StatelessWidget {
           //   appBar:AppBar(),
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: dW * 0.1),
+            padding: EdgeInsets.symmetric(
+              horizontal: dW * 0.04,
+            ),
             child: ListView(children: [
               Row(children: [
                 IconButton(
@@ -40,9 +42,9 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                 ),
               ]),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-                child: TitleText(title: 'Cart Items'),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: dW * 0.05),
+                child: TitleText(dW: dW, title: 'Cart Items'),
               ),
               coursesToShow.isEmpty
                   ? const Padding(
@@ -114,7 +116,10 @@ class CheckoutScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const TitleText(title: 'Order Details'),
+              TitleText(
+                title: 'Order Details',
+                dW: dW,
+              ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
